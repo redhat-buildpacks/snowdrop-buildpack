@@ -1,16 +1,15 @@
 # Snowdrop Buildpacks
 
-This are some WIP build stacks for building Snowdrop applications using supported images like Red Hat OpenJDK and Red Hat Snowdrop builder (Mandrel).
+These are some WIP build stacks for building Spring Boot applications using Red Hat supported images like UBI, OpenJDK.
 
-To use buildpacks you'll need `pack`, see the instructions here on how to install it:
+## Prerequisite
 
-https://buildpacks.io/docs/tools/pack/
-
+- To use buildpacks you'll need to install the client `pack`. See the instructions here on how to [install it](https://buildpacks.io/docs/tools/pack)
+- [Docker desktop](https://docs.docker.com/desktop/) and started
 
 ## Installation
 
-To install the build packs run clone this repo and run the `create-buildpacks.sh` script.
-
+To create the `containerized image` of the Snowdrop buildpacks project, clone this repo and run the `./create-buildpacks.sh` script.
 
 ## Snowdrop JVM
 
