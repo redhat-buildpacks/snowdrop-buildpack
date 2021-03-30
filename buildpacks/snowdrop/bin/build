@@ -75,10 +75,9 @@ if [[ -f pom.xml ]]; then
 
         # Move built app to a layer
         echo "Copying app to app layer"
-        mkdir -p $LAYERS_DIR/1-app
-        cp target/$targetJar $LAYERS_DIR/1-app
-        ln -s $LAYERS_DIR/1-libdeps/lib  $LAYERS_DIR/1-app/lib
-        echo -e 'launch = true' > $LAYERS_DIR/1-app.toml
+        mkdir -p $LAYERS_DIR/2-app
+        cp target/$targetJar $LAYERS_DIR/2-app
+        echo -e 'launch = true' > $LAYERS_DIR/2-app.toml
 
         find $APP_DIR -mindepth 1 -delete       
 
