@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-DEFAULT_PREFIX=redhat/buildpacks-stack-quarkus
+DEFAULT_PREFIX=redhat/buildpacks-stack-snowdrop
 
 REPO_PREFIX=${DEFAULT_PREFIX}
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-ID_PREFIX="io.quarkus.buildpacks"
+ID_PREFIX="dev.snowdrop.buildpacks"
 
-DEFAULT_PREFIX=redhat/buildpacks-stack-quarkus
+DEFAULT_PREFIX=redhat/buildpacks-stack-snowdrop
 
 REPO_PREFIX=${DEFAULT_PREFIX}
 
@@ -48,6 +48,7 @@ fi
 
 DIR=$(cd $(dirname $0) && pwd)
 IMAGE_DIR=$(realpath "${STACK_DIR}")
+#IMAGE_DIR="$( cd "$( dirname "${STACK_DIR}" )" &> /dev/null && pwd )"
 TAG=$(basename "${IMAGE_DIR}")
 STACK_ID="${ID_PREFIX}.stack.$(basename "${IMAGE_DIR}")"
 BASE_IMAGE=${REPO_PREFIX}-base:${TAG}

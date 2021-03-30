@@ -1,6 +1,5 @@
 ARG base_image
 FROM ${base_image}
-#FROM registry.access.redhat.com/quarkus/mandrel-20-rhel8:20.1
 
 #ARG cnb_uid=185
 #ARG cnb_gid=185
