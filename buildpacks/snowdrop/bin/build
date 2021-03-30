@@ -59,7 +59,7 @@ if [[ -f pom.xml ]]; then
 
         runCommand="$LAYERS_DIR/0-app/$targetBinary"
     else        
-        targetJar=$(find target -maxdepth 1 -name '*-runner.jar')
+        targetJar=$(find target -maxdepth 1 -name '*.jar')
         targetJar=${targetJar#"target/"} 
 
         echo "Building env config layer"
@@ -68,17 +68,17 @@ if [[ -f pom.xml ]]; then
         echo -e 'launch = true' > $LAYERS_DIR/0-ubiconfig.toml  
 
         #TODO no need for lib layer if building uber-jar
-        echo "Copying libs to libdeps layer"
-        mkdir -p $LAYERS_DIR/1-libdeps/lib
-        cp -rv target/lib $LAYERS_DIR/1-libdeps/
-        echo -e 'launch = true' > $LAYERS_DIR/1-libdeps.toml
+        # echo "Copying libs to libdeps layer"
+        # mkdir -p $LAYERS_DIR/1-libdeps/lib
+        # cp -rv target/lib $LAYERS_DIR/1-libdeps/
+        # echo -e 'launch = true' > $LAYERS_DIR/1-libdeps.toml
 
-        #Move built app to a layer
+        # Move built app to a layer
         echo "Copying app to app layer"
-        mkdir -p $LAYERS_DIR/2-app
-        cp target/$targetJar $LAYERS_DIR/2-app
-        ln -s $LAYERS_DIR/1-libdeps/lib  $LAYERS_DIR/2-app/lib
-        echo -e 'launch = true' > $LAYERS_DIR/2-app.toml
+        mkdir -p $LAYERS_DIR/1-app
+        cp target/$targetJar $LAYERS_DIR/1-app
+        ln -s $LAYERS_DIR/1-libdeps/lib  $LAYERS_DIR/1-app/lib
+        echo -e 'launch = true' > $LAYERS_DIR/1-app.toml
 
         find $APP_DIR -mindepth 1 -delete       
 
