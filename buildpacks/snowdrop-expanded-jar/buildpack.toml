@@ -1,0 +1,12 @@
+# Buildpack API version
+api = "0.2"
+
+# Buildpack ID and metadata
+[buildpack]
+id = "dev.snowdrop.buildpacks.snowdrop-expanded-jar"
+version = "0.0.1"
+name = "Snowdrop Expanded Jar Buildpack"
+
+# Stacks that the buildpack will work with
+[[stacks]]
+id = "dev.snowdrop.buildpacks.stack.jvm"

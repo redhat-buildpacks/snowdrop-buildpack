@@ -2,7 +2,7 @@
 
 set -eo pipefail
 
-echo "---> Quarkus Buildpack"
+echo "---> Snowdrop Maven Buildpack"
 
 # Build script args : https://buildpacks.io/docs/reference/spec/buildpack-api/#binbuild
 APP_DIR=$PWD

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+echo "---> Snowdrop Expanded Jar Buildpack"
+
+# Build script args : https://buildpacks.io/docs/reference/spec/buildpack-api/#binbuild
+APP_DIR=$PWD
+LAYERS_DIR=$1
+PLATFORM_DIR=$2
+BUILD_PLAN=$3
+
+# Is there still a manifest to use?
+if [[ -f META-INF/MANIFEST.MF ]]; then
+
+    echo "Building env config layer"
+    mkdir -p $LAYERS_DIR/0-ubiconfig/env.launch
+    echo $LAYERS_DIR/1-app/app.jar > $LAYERS_DIR/0-ubiconfig/env.launch/JAVA_APP_JAR
+    echo -e 'launch = true' > $LAYERS_DIR/0-ubiconfig.toml  
+
+    #Move built app to a layer
+    echo "Archiving app to app layer"
+    mkdir -p $LAYERS_DIR/1-app
+    # This approach is functional, but makes no attempt to layer the output at all.
+    # Use jar to repack the expanded archive content to a destination jar.
+    # -0 no compress, nested jars must not be compressed in an executable jar
+    # -c create archive
+    # -f filename for destination jar
+    # -m use supplied manifest (to pickup Main-Class etc)
+    jar -0cfm $LAYERS_DIR/1-app/app.jar META-INF/MANIFEST.MF . 
+    echo -e 'launch = true' > $LAYERS_DIR/1-app.toml
+
+    # delete the unused expanded jar content
+    find $APP_DIR -mindepth 1 -delete
+
+    runCommand="/opt/jboss/container/java/run/run-java.sh"
+    # SET DEFAULT START COMMAND
+    cat > "$LAYERS_DIR/launch.toml" <<EOL
+[[processes]]
+type = "web"
+command = "$runCommand"
+EOL
+
+fi
+

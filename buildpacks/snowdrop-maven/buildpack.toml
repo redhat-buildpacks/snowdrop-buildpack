@@ -3,9 +3,9 @@ api = "0.2"
 
 # Buildpack ID and metadata
 [buildpack]
-id = "dev.snowdrop.buildpacks.buildpack"
+id = "dev.snowdrop.buildpacks.snowdrop-maven"
 version = "0.0.1"
-name = "Snowdrop Buildpack"
+name = "Snowdrop Maven Buildpack"
 
 # Stacks that the buildpack will work with
 [[stacks]]

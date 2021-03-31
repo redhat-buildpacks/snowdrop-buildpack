@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+echo "- Testing for jar content:"
+if [[ ! -d META-INF ]]; then 
+  echo "- META-INF missing."
+  exit 100
+fi
+if [[ ! -f META-INF/MANIFEST.MF ]]; then 
+  echo "- MANIFEST missing."
+  exit 100
+fi
+echo "- Checking for Main-Class in Manifest"
+grep 'Main-Class:' META-INF/MANIFEST.MF 2>&1 >/dev/null
+RC=$?
+if [[ $? != 0 ]]; then
+  echo "- Main-Class missing."
+  exit 100
+else
+  echo "- Found."
+fi
+

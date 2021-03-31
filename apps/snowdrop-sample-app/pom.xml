@@ -38,6 +38,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<builder>redhat/buildpacks-builder-snowdrop-jvm:latest</builder>
+						<pullPolicy>IF_NOT_PRESENT</pullPolicy>
+						<verboseLogging>true</verboseLogging>
+						<!-- <cleanCache>true</cleanCache> -->
+					</image>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

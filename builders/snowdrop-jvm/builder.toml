@@ -1,10 +1,18 @@
 # Buildpacks to include in builder
 [[buildpacks]]
-uri = "../../buildpacks/snowdrop"
+uri = "../../buildpacks/snowdrop-maven"
+
+[[buildpacks]]
+uri = "../../buildpacks/snowdrop-expanded-jar"
 
 [[order]]
     [[order.group]]
-    id = "dev.snowdrop.buildpacks.buildpack"
+    id = "dev.snowdrop.buildpacks.snowdrop-maven"
+    version = "0.0.1"
+
+[[order]]
+    [[order.group]]
+    id = "dev.snowdrop.buildpacks.snowdrop-expanded-jar"
     version = "0.0.1"
 
 # Stack that will be used by the builder
