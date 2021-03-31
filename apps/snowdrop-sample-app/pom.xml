@@ -39,6 +39,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>2.4.4</version>
+				<configuration>
+					<image>
+						<verboseLogging>true</verboseLogging>
+					</image>
+					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
+					<imageBuilder>redhat/buildpacks-builder-snowdrop-jvm:latest</imageBuilder>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

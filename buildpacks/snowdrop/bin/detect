@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
-set -eo pipefail
+set -ex pipefail
 
-echo "- Testing for Pom:"
-if [[ ! -f pom.xml ]]; then 
-  exit 100
+echo "- Checking for Pom:"
+if [[ ! -f pom.xml ]]; then
+  echo "- Checking for BOOT-INF folder:"
+  if [ -d "BOOT-INF" ]; then
+     echo "- Found."
+  else
+     exit 100
+  fi
 else
   echo "- Checking for Snowdrop in Pom"
   grep dev.snowdrop pom.xml 2>&1 >/dev/null
