@@ -19,26 +19,12 @@ To test the buildpack for [Snowdrop](https://snowdrop.dev) using the JVM run thi
 pack build snowdrop-jvm-test-app --path apps/snowdrop-sample-app --builder redhat/buildpacks-builder-snowdrop-jvm:latest
 ```
 
-## Snowdrop Native
-
-To test the buildpack for [Snowdrop](https://snowdrop.dev) compiling to native code run this:
-
-```
-pack build snowdrop-native-test-app --path apps/snowdrop-sample-app --builder redhat/buildpacks-builder-snowdrop-native:latest
-```
-
 ## Running
 
 After having built the image with one of the commands above you can simply run them, eg:
 
 ```
-docker run -it --rm snowdrop-jvm-test-app
-```
-
-or
-
-```
-docker run -it --rm snowdrop-native-test-app
+docker run -d -p 8080:8080 --name springboot snowdrop-jvm-test-app
 ```
 
 ## Development
