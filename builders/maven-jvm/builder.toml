@@ -1,6 +1,6 @@
 # Buildpacks to include within the Builder
 [[buildpacks]]
-uri = "../../buildpacks/snowdrop"
+uri = "../../buildpacks/maven"
 
 [[order]]
     [[order.group]]
