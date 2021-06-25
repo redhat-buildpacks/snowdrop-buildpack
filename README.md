@@ -26,7 +26,7 @@ To create the `builder image` of the Snowdrop buildpacks project, clone this rep
 ## Test the builder using a Spring Boot project
 
 To test the `builder` on a Spring Boot application, execute the following command
-top of the example [project](./apps).
+top of the example [project](./apps) with the help of the `pack` tool.
 
 ```bash
 pack build snowdrop-jvm-test-app --path apps/snowdrop-sample-app --builder redhat/buildpacks-builder-snowdrop-jvm:latest
@@ -42,6 +42,4 @@ docker run -d -p 8080:8080 --name springboot snowdrop-jvm-test-app
 
 ## Development
 
-The information for creating buildpacks comes from:
-
-https://buildpacks.io/docs/buildpack-author-guide/create-buildpack/
+More information about the CNCF Buildpacks project is available here: https://buildpacks.io/docs/
