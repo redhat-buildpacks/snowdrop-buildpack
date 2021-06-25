@@ -1,6 +1,8 @@
-# Sample Stacks
+# Stacks
 
-Sample of stacks.
+This project contains different `stacks` such as:
+
+- [openjdk11](./jvm)
 
 ## Development
 
@@ -16,7 +18,7 @@ To build the stack use the `./build-stack` script:
 Example:
 
 ```bash
-./build-stack.sh bionic
+./build-stack.sh redhat/buildpacks-stack-snowdrop <dir>
 ```
 
 To use this stack see the [sample builders](../builders)

@@ -5,7 +5,7 @@ These are some WIP build stacks for building Spring Boot applications using Red 
 ## Prerequisite
 
 - To use buildpacks you'll need to install the client `pack`. See the instructions here on how to [install it](https://buildpacks.io/docs/tools/pack)
-- [Docker desktop](https://docs.docker.com/desktop/) and started
+- [Docker desktop](https://docs.docker.com/desktop/) installed and started
 
 ## Installation
 
@@ -13,9 +13,9 @@ To create the `containerized image` of the Snowdrop buildpacks project, clone th
 
 ## Snowdrop JVM
 
-To test the buildpack for [Snowdrop](https://snowdrop.dev) using the JVM run this:
+To test the buildpack for [Snowdrop](https://snowdrop.dev) using a JVM, execute the following command:
 
-```
+```bash
 pack build snowdrop-jvm-test-app --path apps/snowdrop-sample-app --builder redhat/buildpacks-builder-snowdrop-jvm:latest
 ```
 
@@ -23,7 +23,7 @@ pack build snowdrop-jvm-test-app --path apps/snowdrop-sample-app --builder redha
 
 After having built the image with one of the commands above you can simply run them, eg:
 
-```
+```bash
 docker run -d -p 8080:8080 --name springboot snowdrop-jvm-test-app
 ```
 

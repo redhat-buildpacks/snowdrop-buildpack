@@ -1,4 +1,4 @@
-# Buildpacks to include in builder
+# Buildpacks to include within the Builder
 [[buildpacks]]
 uri = "../../buildpacks/snowdrop"
 
@@ -7,7 +7,7 @@ uri = "../../buildpacks/snowdrop"
     id = "dev.snowdrop.buildpacks.buildpack"
     version = "0.0.1"
 
-# Stack that will be used by the builder
+# Stack(s) that will be used by the Builder
 [stack]
 id = "dev.snowdrop.buildpacks.stack.jvm"
 run-image = "redhat/buildpacks-stack-snowdrop-run:jvm"
