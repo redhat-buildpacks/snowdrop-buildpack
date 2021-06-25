@@ -18,17 +18,21 @@ It could be extended in a near future to:
 
 ## Installation
 
-To create the `containerized image` of the Snowdrop buildpacks project, clone this repo and run the `./create-buildpacks.sh` script.
+To create the `builder image` of the Snowdrop buildpacks project, clone this repo and run the following bash script:
+```shell script
+./create-buildpacks.sh
+```
 
-## Snowdrop JVM
+## Test the builder using a Spring Boot project
 
-To test the buildpack for [Snowdrop](https://snowdrop.dev) using a JVM, execute the following command:
+To test the `builder` on a Spring Boot application, execute the following command
+top of the example [project](./apps).
 
 ```bash
 pack build snowdrop-jvm-test-app --path apps/snowdrop-sample-app --builder redhat/buildpacks-builder-snowdrop-jvm:latest
 ```
 
-## Running
+## Test the image build
 
 After having built the image with one of the commands above you can simply run them, eg:
 
