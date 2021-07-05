@@ -11,6 +11,11 @@ It could be extended in a near future to:
 - Support several `jdk` using different `run image` part of new stacks or new `build image` supporting more recent versions of `maven`, `gradle`, etc
 - Provide additional `buildpack` to instruct the `pack tool` during the build process to by example include some needed libraries, tools or add CA certificate or configure environment variables
 
+## Documentation
+
+- CNCF Official doc: https://buildpacks.io/
+- Blog posts explaining stack, builder and buildpacks: https://www.altoros.com/blog/author/m-beaverson/
+
 ## Prerequisite
 
 - To use buildpacks you'll need to install the client `pack`. See the instructions here on how to [install it](https://buildpacks.io/docs/tools/pack)
