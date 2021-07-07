@@ -97,7 +97,7 @@ cat >> "$LAYERS_DIR/launch.toml" <<EOL
 [[bom]]
 name = "maven"
 [bom.metadata]
-version = "3.6.4"
+version = "$(mvn -version | sed -n 1p)"
 EOL
 
 fi
