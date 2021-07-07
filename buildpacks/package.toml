@@ -1,0 +1,8 @@
+# Location of the buildpack we are packaging using an uri pointing to a folder
+[buildpack]
+uri = "maven/"
+
+# [[dependencies]]
+# Additional buildpacks that this buildpack depend on and defined using an uri pointing to a folder or OCI image
+# uri = "samples/buildpacks/hello-moon"
+# or uri = "docker://cnbs/sample-package:hello-world"
