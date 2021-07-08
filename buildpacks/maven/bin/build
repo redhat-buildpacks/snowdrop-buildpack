@@ -81,7 +81,11 @@ if [[ -f pom.xml ]]; then
 
         find $APP_DIR -mindepth 1 -delete       
 
+        # Command to be used with ubi8-openjdk11
         runCommand="/opt/jboss/container/java/run/run-java.sh"
+
+        # Command to be used with ubi8-openjdk11-runtime
+        # runCommand="/opt/jboss/container/java/run"
     fi
 
     # SET DEFAULT START COMMAND
@@ -95,9 +99,10 @@ EOL
 # ADD A BOM
 cat >> "$LAYERS_DIR/launch.toml" <<EOL
 [[bom]]
-name = "maven"
+name = "compilation-info"
 [bom.metadata]
-version = "$(mvn -version | sed -n 1p)"
+maven-version = "$(mvn -version | sed -n 1p)"
+run-command = "$runCommand"
 EOL
 
 fi
