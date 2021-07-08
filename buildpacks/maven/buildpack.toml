@@ -3,7 +3,7 @@ api = "0.5"
 
 # Buildpack ID and metadata
 [buildpack]
-id = "dev.snowdrop.buildpacks.buildpack"
+id = "dev.snowdrop.buildpacks.maven"
 version = "0.0.1"
 name = "Snowdrop Maven Buildpack"
 
