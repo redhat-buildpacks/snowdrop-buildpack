@@ -34,7 +34,7 @@ To test the `builder` on a Spring Boot application, execute the following comman
 top of the example [project](./apps) with the help of the `pack` tool.
 
 ```bash
-pack build snowdrop-jvm-test-app --path apps/snowdrop-sample-app --builder redhat/buildpacks-builder-maven-jvm:latest
+pack build snowdrop-jvm-app --path apps/snowdrop-sample-app --builder redhat/buildpacks-builder-maven-jvm:latest
 ```
 
 ## Test the image build
@@ -42,7 +42,7 @@ pack build snowdrop-jvm-test-app --path apps/snowdrop-sample-app --builder redha
 After having built the image with one of the commands above you can simply run them, eg:
 
 ```bash
-docker run -d -p 8080:8080 --name springboot snowdrop-jvm-test-app
+docker run -d -p 8080:8080 --name springboot snowdrop-jvm-app
 ```
 
 ## Development
