@@ -3,7 +3,7 @@
 #TODO
 # - support build args via env var 
 
-set -exo pipefail
+set -eo pipefail
 
 echo "---> Snowdrop Buildpack"
 

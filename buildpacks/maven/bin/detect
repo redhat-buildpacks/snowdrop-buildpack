@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -exo pipefail
+set -eo pipefail
 
 # GET ARGS
 platform_dir=$1
