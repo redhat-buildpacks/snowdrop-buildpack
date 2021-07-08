@@ -1,5 +1,10 @@
-#!/usr/bin/env bash
-set -ex pipefail
+#!/bin/sh
+
+set -exo pipefail
+
+# GET ARGS
+platform_dir=$1
+plan_path=$2
 
 echo "- Checking for Pom:"
 if [[ ! -f pom.xml ]]; then
