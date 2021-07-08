@@ -9,9 +9,6 @@
 *.iml
 *.iws
 
-# NetBeans
-nb-configuration.xml
-
 # Visual Studio Code
 .vscode
 
@@ -28,3 +25,6 @@ nb-configuration.xml
 
 # Maven
 target/
+
+# Others
+tmp/
