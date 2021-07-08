@@ -1,13 +1,21 @@
 # Buildpacks to include within the Builder
 [[buildpacks]]
 uri = "../../buildpacks/maven"
+
+[[buildpacks]]
+uri = "../../buildpacks/dummy"
+
 # Build pack conteant could also be defned as a OCI image uri
 # if the buildpack hs been created as OCI image "pack buildpack package snowdrop/maven-bp --config ./package.toml"
 # uri = "docker://snowdrop/maven-bp"
 
 [[order]]
+     [[order.group]]
+     id = "dev.snowdrop.buildpacks.dummy"
+     version = "0.0.1"
+
     [[order.group]]
-    id = "dev.snowdrop.buildpacks.buildpack"
+    id = "dev.snowdrop.buildpacks.maven"
     version = "0.0.1"
 
 # Stack(s) that will be used by the Builder
