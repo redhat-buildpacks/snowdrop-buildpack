@@ -35,11 +35,11 @@ public class App implements QuarkusApplication {
         LOG.info("## Check the name of the program called by the lifecycle creator");
         switch (ProcessHandler.commandProcessed(BP_CMD)) {
             case "detect":
-                LOG.info("## Command called by lifecycle creator is /bin/detect");
+                LOG.info("## Command called is /bin/detect");
                 Detect d = new Detect();
                 return d.call();
             case "build":
-                LOG.info("## Command called by lifecycle creator is /bin/build");
+                LOG.info("## Command called is /bin/build");
                 Build b = new Build();
                 return b.call();
             case "": new Exception("## Unsupported command called !");
