@@ -23,12 +23,12 @@ public class App implements QuarkusApplication {
 
     @Override
     public int run(String... args) throws Exception {
-        String BP_CMD= System.getenv("BP_CMD");
-        if (BP_CMD == "") {
+        String BP_CMD = System.getenv("BP_CMD");
+        if (BP_CMD == null) {
             BP_CMD = "ps -eo command | grep '/bin/*'";
         }
-
-        LOG.infof("Arguments passed: $s",join(" ", args));
+        LOG.info("BP_CMD :" + BP_CMD);
+        LOG.infof("Arguments passed: %s",join(" ", args));
         LOG.info("## Env Var ...");
         printAllEnv();
 
