@@ -74,6 +74,8 @@ mv main/target/main-runner bin/main
 ln -fs main bin/detect 
 ln -fs main bin/build 
 ```
+**Interesting**: All these instructions can be executed using the bash script `./scripts/build.sh`
+
 - Package the `dummy` buildpack within the project's builder image
 ```bash
 pack builder create redhat/buildpacks-builder-maven-jvm:latest --config ./builders/maven-jvm/builder.toml
