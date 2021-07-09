@@ -1,11 +1,22 @@
 package dev.snowdrop.buildpack;
 
+import dev.snowdrop.buildpack.utils.ProcessHandler;
+
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+import static dev.snowdrop.buildpack.utils.ProcessHandler.runtimeCmd;
+
 public class ProcessHandleDemo {
     public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
+        String cmd = "ps -eo command | grep com.docker.backend";
+        //runtimeCmd(cmd);
+        //launchCmd();
+    }
+
+    private static void launchCmd() throws IOException, ExecutionException, InterruptedException {
         ProcessBuilder processBuilder = new ProcessBuilder("/Users/cmoullia/temp/ln-main/detect");
         Process process = processBuilder.start();
 

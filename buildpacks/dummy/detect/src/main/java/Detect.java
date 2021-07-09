@@ -71,10 +71,4 @@ public class Detect implements QuarkusApplication {
             System.out.println("## " + key + " : " + value);
         }
     }
-
-    private static void runtimeCmd(String cmd) throws IOException {
-        Process p = Runtime.getRuntime().exec(new String[]{"bash", "-c", cmd});
-        Scanner sc = new Scanner(p.getInputStream());
-        while (sc.hasNext()) System.out.println(sc.nextLine());
-    }
 }
