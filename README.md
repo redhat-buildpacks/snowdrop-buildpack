@@ -1,5 +1,21 @@
 # Snowdrop Buildpacks
 
+Table of Contents
+=================
+
+  * [Introduction](#introduction)
+  * [Documentation](#documentation)
+  * [Prerequisite](#prerequisite)
+  * [Installation](#installation)
+  * [Testing](#testing)
+    * [Build a Spring Boot project using our builder](#build-a-spring-boot-project-using-our-builder)
+    * [Test the image built](#test-the-image-built)
+  * [Development of a Buildpacks using Quarkus and native build](#development-of-a-buildpacks-using-quarkus-and-native-build)
+    * [Instructions](#instructions)
+  * [Development](#development)
+
+## Introduction
+
 These are some WIP build stacks for building Spring Boot applications using Red Hat supported images such as: ubi8 and OpenJDK.
 This project allows to generate a [builder](https://buildpacks.io/docs/concepts/components/builder/) image packaging the:
 - `Snowdrop` [buildpack](https://buildpacks.io/docs/concepts/components/buildpack/)
@@ -28,7 +44,9 @@ To create the `builder image` of the Snowdrop buildpacks project, clone this rep
 ./create-buildpacks.sh
 ```
 
-## Test the builder using a Spring Boot project
+## Testing
+
+### Build a Spring Boot project using our builder
 
 To test the `builder` on a Spring Boot application, execute the following command
 top of the example [project](./apps) with the help of the `pack` tool.
@@ -37,7 +55,7 @@ top of the example [project](./apps) with the help of the `pack` tool.
 pack build snowdrop-jvm-app --path apps/snowdrop-sample-app --builder redhat/buildpacks-builder-maven-jvm:latest
 ```
 
-## Test the image build
+### Test the image built
 
 After having built the image with one of the commands above you can simply run them, eg:
 
@@ -45,11 +63,7 @@ After having built the image with one of the commands above you can simply run t
 docker run -d -p 8080:8080 --name springboot snowdrop-jvm-app
 ```
 
-## Development
-
-More information about the CNCF Buildpacks project is available here: https://buildpacks.io/docs/
-
-## Java Quarkus Buildpacks
+## Development of a Buildpacks using Quarkus and native build
 
 A java quarkus project has been created in order to experiment how java technology could be used as replacement to `go` language or `bash` scripts.
 
@@ -84,3 +98,7 @@ pack builder create redhat/buildpacks-builder-maven-jvm:latest --config ./builde
 ```bash
 pack build java-dummy-app --builder redhat/buildpacks-builder-maven-jvm:latest -p ./apps/snowdrop-sample-app -v -b dev.snowdrop.buildpacks.dummy
 ```
+
+## Development
+
+More information about the CNCF Buildpacks project is available here: https://buildpacks.io/docs/
