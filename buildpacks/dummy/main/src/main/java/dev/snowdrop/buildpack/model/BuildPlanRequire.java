@@ -24,11 +24,12 @@ public class BuildPlanRequire {
         Metadata = metadata;
     }
 
-    public StringBuilder toArray(StringBuilder sb) {
+    public StringBuilder toArray() {
+        StringBuilder sb = new StringBuilder();
         sb.append(System.getProperty("line.separator"));
         sb.append(tomlArrayBuildPlanRequireName);
         sb.append(System.getProperty("line.separator"));
-        sb.append(tomlBuildPlanRequireName + " = " + this.getName());
+        sb.append(tomlBuildPlanRequireName + " = \"" + this.getName() + "\"");
         return sb;
     }
 }

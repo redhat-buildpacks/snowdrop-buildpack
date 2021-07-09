@@ -6,6 +6,14 @@ import java.util.Scanner;
 
 public class ProcessHandler {
 
+    public static void runtimeCmd(String cmd) throws IOException {
+        java.lang.Process p = Runtime.getRuntime().exec(new String[]{"bash", "-c", cmd});
+        Scanner s = new Scanner(p.getInputStream());
+        while(s.hasNext()) {
+            System.out.println(s.nextLine());
+        };
+    }
+
     public static Scanner runtimeCmdScanner(String cmd) throws IOException {
         java.lang.Process p = Runtime.getRuntime().exec(new String[]{"bash", "-c", cmd});
         return new Scanner(p.getInputStream());

@@ -13,11 +13,12 @@ public class BuildPlanProvide {
         Name = name;
     }
 
-    public StringBuilder toArray(StringBuilder sb) {
+    public StringBuilder toArray() {
+        StringBuilder sb = new StringBuilder();
         sb.append(System.getProperty("line.separator"));
         sb.append(tomlArrayBuildPlanName);
         sb.append(System.getProperty("line.separator"));
-        sb.append(tomlBuildPlanName + " = " + this.getName());
+        sb.append(tomlBuildPlanName  + " = \"" + this.getName() + "\"");
         return sb;
     }
 }

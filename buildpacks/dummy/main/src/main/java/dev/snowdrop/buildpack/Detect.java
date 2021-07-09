@@ -1,5 +1,6 @@
 package dev.snowdrop.buildpack;
 import dev.snowdrop.buildpack.model.BuildPlan;
+import dev.snowdrop.buildpack.model.BuildPlanProvide;
 import dev.snowdrop.buildpack.model.BuildPlanRequire;
 
 import java.io.File;
@@ -8,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static dev.snowdrop.buildpack.App.LOG;
+import static dev.snowdrop.buildpack.utils.ProcessHandler.runtimeCmd;
 import static dev.snowdrop.buildpack.utils.TomlHandler.writeBuildPlan;
 
 public class Detect {
@@ -39,9 +41,9 @@ public class Detect {
         LOG.info("## Check if pom.xml exists");
         if (pomFile.isFile()) {
             LOG.info("pom.xml file is there ;-)");
-            LOG.info("Build plan : ");
-            printBuildPlan();
-            // writeBuildPlan(buildPlan());
+            //runtimeCmd("cat "+this.BUILD_PLAN);
+            //printBuildPlan();
+            writeBuildPlan(buildPlan());
             return 0;
         } else {
             LOG.info("pom.xml file do not exist !");
@@ -50,12 +52,12 @@ public class Detect {
     }
 
     private BuildPlan buildPlan() {
-        BuildPlanRequire bpr = new BuildPlanRequire();
-        bpr.setName("maven");
+        BuildPlanProvide bpp = new BuildPlanProvide();
+        bpp.setName("maven");
 
         BuildPlan bp = new BuildPlan();
         bp.setPath(this.BUILD_PLAN);
-        bp.setBuildPlanRequires(new BuildPlanRequire[]{bpr});
+        bp.setBuildPlanProvides(new BuildPlanProvide[]{bpp});
         return bp;
     }
 

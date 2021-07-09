@@ -1,6 +1,10 @@
 package dev.snowdrop.buildpack;
 
+import dev.snowdrop.buildpack.model.BuildPlan;
+import dev.snowdrop.buildpack.model.BuildPlanRequire;
+
 import static dev.snowdrop.buildpack.App.LOG;
+import static dev.snowdrop.buildpack.utils.TomlHandler.writeBuildPlan;
 
 public class Build {
     // A directory that may contain subdirectories representing each layer created by the buildpack in the final image or build cache.
@@ -26,7 +30,18 @@ public class Build {
         LOG.info("## Layers dir: " + this.LAYERS_DIR);
         LOG.info("## Platform dir: " + this.PLATFORM_DIR);
         LOG.infof("## Build plan: ", this.BUILD_PLAN);
+        //writeBuildPlan(buildPlan());
         return 0;
+    }
+
+    private BuildPlan buildPlan() {
+        BuildPlanRequire bpr = new BuildPlanRequire();
+        bpr.setName("maven");
+
+        BuildPlan bp = new BuildPlan();
+        bp.setPath(this.BUILD_PLAN);
+        bp.setBuildPlanRequires(new BuildPlanRequire[]{bpr});
+        return bp;
     }
 
 }

@@ -16,17 +16,17 @@ public class TomlHandler {
 
         if (buildPlan.getBuildPlanProvides() != null) {
             for(BuildPlanProvide bpp: buildPlan.getBuildPlanProvides()) {
-                str.append(bpp.toArray(str));
+                str.append(bpp.toArray());
             }
         }
 
         if (buildPlan.getBuildPlanRequires() != null) {
             for (BuildPlanRequire bpr : buildPlan.getBuildPlanRequires()) {
-                str.append(bpr.toArray(str));
+                str.append(bpr.toArray());
             }
         }
 
-        LOG.info("Build Plan : " + str.toString());
+        LOG.info("Build Plan generated: " + str.toString());
 
         try {
             FileWriter myWriter = new FileWriter(buildPlan.getPath());
