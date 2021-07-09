@@ -1,11 +1,6 @@
 package dev.snowdrop.buildpack;
-
-import picocli.CommandLine;
-
 import java.io.File;
-
 import static dev.snowdrop.buildpack.App.LOG;
-import static dev.snowdrop.buildpack.utils.EnvVars.printAllEnv;
 
 public class Detect {
 
@@ -21,18 +16,12 @@ public class Detect {
         LOG.info("## Platform dir: " + PLATFORM_DIR);
         LOG.info("## Working Directory = " + workingDir);
 
-        System.out.println("## Env Var ...");
-        printAllEnv();
-
-        //runtimeCmd("pwd");
-        //runtimeCmd("ls -la");
-
-        System.out.println("## Check if pom.xml exists");
+        LOG.info("## Check if pom.xml exists");
         if (pomFile.isFile()) {
-            System.out.println("pom.xml file is there ;-)");
+            LOG.info("pom.xml file is there ;-)");
             return 0;
         } else {
-            System.out.println("pom.xml file do not exist !");
+            LOG.info("pom.xml file do not exist !");
             return 1;
         }
     }

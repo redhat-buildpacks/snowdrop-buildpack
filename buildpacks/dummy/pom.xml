@@ -9,8 +9,6 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <modules>
-        <module>detect</module>
-        <module>build</module>
         <module>main</module>
     </modules>
 
@@ -38,10 +36,9 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- Command line tool -->
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-picocli</artifactId>
+            <artifactId>quarkus-core</artifactId>
         </dependency>
     </dependencies>
 

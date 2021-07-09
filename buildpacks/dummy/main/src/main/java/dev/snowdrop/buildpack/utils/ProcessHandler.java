@@ -4,21 +4,12 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Scanner;
 
-import static java.lang.System.out;
-
 public class ProcessHandler {
-
-    public static void runtimeCmd(String cmd) throws IOException {
-        java.lang.Process p = Runtime.getRuntime().exec(new String[]{"bash", "-c", cmd});
-        Scanner sc = new Scanner(p.getInputStream());
-        while (sc.hasNext()) System.out.println(sc.nextLine());
-    }
 
     public static Scanner runtimeCmdScanner(String cmd) throws IOException {
         java.lang.Process p = Runtime.getRuntime().exec(new String[]{"bash", "-c", cmd});
         return new Scanner(p.getInputStream());
     }
-
 
     public static String processDetails(ProcessHandle process) {
         return String.format("%8d %8s %10s %26s %-40s",

@@ -48,3 +48,37 @@ docker run -d -p 8080:8080 --name springboot snowdrop-jvm-app
 ## Development
 
 More information about the CNCF Buildpacks project is available here: https://buildpacks.io/docs/
+
+## Java Quarkus Buildpacks
+
+A java quarkus project has been created in order to experiment how java technology could be used as replacement to `go` language or `bash` scripts.
+
+### Instructions
+
+- Launch first docker locally ;-)
+- To create the native executable of the `dummy` buildpacks, execute the following command under
+```bash
+cd buildpacks/dummy
+mvn clean package -Pnative \
+    -Dquarkus.native.container-build=true \
+    -Dquarkus.banner.enabled=false \
+    -Dquarkus.package.output-name=main \
+    -f main/pom.xml
+```
+- Rename it and move it under the `bin` folder
+```bash
+mv main/target/main-runner bin/main
+```  
+- Create the symbolic links pointing to the main application
+```bash
+ln -fs main bin/detect 
+ln -fs main bin/build 
+```
+- Package the `dummy` buildpack within the project's builder image
+```bash
+pack builder create redhat/buildpacks-builder-maven-jvm:latest --config ./builders/maven-jvm/builder.toml
+```
+- Play it and build the `application` packaged within this project
+```bash
+pack build java-dummy-app --builder redhat/buildpacks-builder-maven-jvm:latest -p ./apps/snowdrop-sample-app -v -b dev.snowdrop.buildpacks.dummy
+```
