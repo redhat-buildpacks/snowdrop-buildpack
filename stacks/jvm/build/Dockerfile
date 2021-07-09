@@ -3,6 +3,9 @@ FROM ${base_image}
 
 ARG stack_id
 
+USER root
+RUN microdnf install -y procps
+
 # Set required CNB information
 ENV CNB_STACK_ID=${stack_id}
 ENV CNB_USER_ID=185
