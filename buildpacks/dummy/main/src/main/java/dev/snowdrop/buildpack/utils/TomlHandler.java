@@ -26,12 +26,14 @@ public class TomlHandler {
             }
         }
 
+        LOG.info("Build Plan : " + str.toString());
+
         try {
             FileWriter myWriter = new FileWriter(buildPlan.getPath());
             myWriter.write(str.toString());
             myWriter.close();
         } catch (IOException e) {
-            LOG.info("Error occured !!");
+            LOG.info("Error occurred !!");
             LOG.info(e.getMessage());
         }
     }

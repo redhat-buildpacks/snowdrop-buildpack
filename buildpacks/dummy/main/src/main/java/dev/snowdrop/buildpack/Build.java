@@ -16,16 +16,16 @@ public class Build {
         if (args.length < 3) {
             LOG.errorf("expected 3 arguments and received %d", args.length);
         }
-        LAYERS_DIR = args[0];
-        PLATFORM_DIR = args[1];
-        BUILD_PLAN = args[2];
+        this.LAYERS_DIR = args[0];
+        this.PLATFORM_DIR = args[1];
+        this.BUILD_PLAN = args[2];
     }
 
     public int call() throws Exception {
         LOG.infof("## Build called :: Buildpack :: %s",CNB_BUILDPACK);
-        LOG.info("## Layers dir: " + LAYERS_DIR);
-        LOG.info("## Platform dir: " + PLATFORM_DIR);
-        LOG.infof("## Build plan: ", BUILD_PLAN);
+        LOG.info("## Layers dir: " + this.LAYERS_DIR);
+        LOG.info("## Platform dir: " + this.PLATFORM_DIR);
+        LOG.infof("## Build plan: ", this.BUILD_PLAN);
         return 0;
     }
 

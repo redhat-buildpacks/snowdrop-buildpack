@@ -3,6 +3,10 @@ import dev.snowdrop.buildpack.model.BuildPlan;
 import dev.snowdrop.buildpack.model.BuildPlanRequire;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import static dev.snowdrop.buildpack.App.LOG;
 import static dev.snowdrop.buildpack.utils.TomlHandler.writeBuildPlan;
 
@@ -16,13 +20,11 @@ public class Detect {
         if (args.length < 2) {
             LOG.errorf("expected 2 arguments and received %d", args.length);
         }
-        PLATFORM_DIR = args[0];
-        BUILD_PLAN = args[1];
+        this.PLATFORM_DIR = args[0];
+        this.BUILD_PLAN = args[1];
     }
 
     public int call() throws Exception {
-        String PLATFORM_DIR = "";
-        String BUILD_PLAN = "";
 
         String CNB_BUILDPACK = System.getenv("CNB_BUILDPACK_DIR");
 
@@ -30,14 +32,16 @@ public class Detect {
         File pomFile = new File(workingDir + "/pom.xml");
 
         LOG.infof("## Detect called :: Buildpack :: %s",CNB_BUILDPACK);
-        LOG.info("## Platform dir: " + PLATFORM_DIR);
-        LOG.infof("## Build plan: %s", BUILD_PLAN);
+        LOG.info("## Platform dir: " + this.PLATFORM_DIR);
+        LOG.infof("## Build plan: %s", this.BUILD_PLAN);
         LOG.info("## Working Directory = " + workingDir);
 
         LOG.info("## Check if pom.xml exists");
         if (pomFile.isFile()) {
             LOG.info("pom.xml file is there ;-)");
-            writeBuildPlan(buildPlan());
+            LOG.info("Build plan : ");
+            printBuildPlan();
+            // writeBuildPlan(buildPlan());
             return 0;
         } else {
             LOG.info("pom.xml file do not exist !");
@@ -50,9 +54,24 @@ public class Detect {
         bpr.setName("maven");
 
         BuildPlan bp = new BuildPlan();
-        bp.setPath(BUILD_PLAN);
+        bp.setPath(this.BUILD_PLAN);
         bp.setBuildPlanRequires(new BuildPlanRequire[]{bpr});
         return bp;
+    }
+
+    private void printBuildPlan() {
+        try {
+            // read all bytes
+            byte[] bytes = Files.readAllBytes(Paths.get(this.BUILD_PLAN));
+            LOG.info("File size: " + bytes.length);
+            // convert bytes to string
+            String content = new String(bytes);
+            // print contents
+            LOG.info(content);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
