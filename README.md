@@ -65,12 +65,12 @@ docker run -d -p 8080:8080 --name springboot snowdrop-jvm-app
 
 ## Development of a Buildpacks using Quarkus and native build
 
-A java quarkus project called `dummy` has been created within the buildpacks [folder](./buildpacks/dummy) 
-in order to experiment how java technology could be used as replacement to the existing buidpacks development
+A java quarkus project called `dummy` has been created within this buildpacks [folder](./buildpacks/dummy) 
+in order to experiment how java technology could be used as replacement to the existing buidpacks designed
 using `go` language or `bash` scripts.
 
 This project will be compiled as a native executable `target/main-runner` and next moved under `bin/main`.
-2 symbolic names, one for `detect` and another for `build` will also be created in order to only compile one executable `main`
+Two symbolic names, one for `detect` and another for `build` will also be created in order to only have to compile one executable `main`
 
 ```bash
 ls -la buildpacks/dummy/bin 
@@ -85,10 +85,9 @@ lrwxr-xr-x  1 cmoullia  staff         4 Jul  9 15:16 detect -> main
 The java class `App` is the core of the application. Quarkus will use the `@QuarkusMain`
 annotation to starts it. When the lifecycle creator will call it, then we will determine the parameters
 of the command line as defined within the process created.
-Based on the result we will instantiate the `Detect` or `Build` class and continues the process.
+A `Detect` or `Build` class is instantiated according to the command, and the process continues.
 
 ```java
-
 @ApplicationScoped
 @QuarkusMain
 public class App implements QuarkusApplication {
