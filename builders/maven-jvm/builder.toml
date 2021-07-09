@@ -10,9 +10,9 @@ uri = "../../buildpacks/dummy"
 # uri = "docker://snowdrop/maven-bp"
 
 [[order]]
-     [[order.group]]
-     id = "dev.snowdrop.buildpacks.dummy"
-     version = "0.0.1"
+    [[order.group]]
+    id = "dev.snowdrop.buildpacks.dummy"
+    version = "0.0.1"
 
     [[order.group]]
     id = "dev.snowdrop.buildpacks.maven"

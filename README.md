@@ -141,7 +141,7 @@ ln -fs main bin/build
 ```bash
 pack builder create redhat/buildpacks-builder-maven-jvm:latest --config ./builders/maven-jvm/builder.toml
 ```
-- Play it and build the `application` packaged within this project
+- Build now a Spring Boot's application packaged within this project using the builder image and the buildpacks `dummy`
 ```bash
 pack build java-dummy-app --builder redhat/buildpacks-builder-maven-jvm:latest -p ./apps/snowdrop-sample-app -v -b dev.snowdrop.buildpacks.dummy
 ```

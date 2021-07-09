@@ -36,11 +36,11 @@ public class App implements QuarkusApplication {
         switch (ProcessHandler.commandProcessed(BP_CMD)) {
             case "detect":
                 LOG.info("## Command called is /bin/detect");
-                Detect d = new Detect();
+                Detect d = new Detect(args);
                 return d.call();
             case "build":
                 LOG.info("## Command called is /bin/build");
-                Build b = new Build();
+                Build b = new Build(args);
                 return b.call();
             case "": new Exception("## Unsupported command called !");
         }
