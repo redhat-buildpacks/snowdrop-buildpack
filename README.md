@@ -65,7 +65,55 @@ docker run -d -p 8080:8080 --name springboot snowdrop-jvm-app
 
 ## Development of a Buildpacks using Quarkus and native build
 
-A java quarkus project has been created in order to experiment how java technology could be used as replacement to `go` language or `bash` scripts.
+A java quarkus project called `dummy` has been created within the buildpacks [folder](./buildpacks/dummy) 
+in order to experiment how java technology could be used as replacement to the existing buidpacks development
+using `go` language or `bash` scripts.
+
+This project will be compiled as a native executable `target/main-runner` and next moved under `bin/main`.
+2 symbolic names, one for `detect` and another for `build` will also be created in order to only compile one executable `main`
+
+```bash
+ls -la buildpacks/dummy/bin 
+total 57384
+drwxr-xr-x  5 cmoullia  staff       160 Jul  9 15:16 .
+drwxr-xr-x  8 cmoullia  staff       256 Jul  9 15:07 ..
+lrwxr-xr-x  1 cmoullia  staff         4 Jul  9 15:16 build -> main
+lrwxr-xr-x  1 cmoullia  staff         4 Jul  9 15:16 detect -> main
+-rwxr-xr-x  1 cmoullia  staff  29380000 Jul  9 15:16 main
+```
+
+The java class `App` is the core of the application. Quarkus will use the `@QuarkusMain`
+annotation to starts it. When the lifecycle creator will call it, then we will determine the parameters
+of the command line as defined within the process created.
+Based on the result we will instantiate the `Detect` or `Build` class and continues the process.
+
+```java
+
+@ApplicationScoped
+@QuarkusMain
+public class App implements QuarkusApplication {
+
+    public static void main(String[] argv) throws Exception {
+        Quarkus.run(App.class, argv);
+    }
+
+    @Override
+    public int run(String... args) throws Exception {
+        ...
+
+        LOG.info("## Check the name of the program called by the lifecycle creator");
+        switch (ProcessHandler.commandProcessed(BP_CMD)) {
+            case "detect":
+                LOG.info("## Command called is /bin/detect");
+                Detect d = new Detect();
+                return d.call();
+            case "build":
+                LOG.info("## Command called is /bin/build");
+                Build b = new Build();
+                return b.call();
+            case "": new Exception("## Unsupported command called !");
+        }
+```
 
 ### Instructions
 
