@@ -11,8 +11,8 @@ Table of Contents
     * [Build a Spring Boot project using our builder](#build-a-spring-boot-project-using-our-builder)
     * [Test the image built](#test-the-image-built)
   * [Development of a Buildpacks using Quarkus and native build](#development-of-a-buildpacks-using-quarkus-and-native-build)
-      * [Instructions to compile the project as buildpack image](#instructions-to-compile-the-project-as-buildpack-image)
-      * [To play with the buildpack locally](#to-play-with-the-buildpack-locally)
+    * [Instructions to compile the project as buildpack image](#instructions-to-compile-the-project-as-buildpack-image)
+    * [To play with the buildpack locally](#to-play-with-the-buildpack-locally)
 
 
 ## Introduction
