@@ -16,14 +16,14 @@ public class TomlHandler {
     public static void writeBuildPlan(BuildPlan buildPlan) {
         StringBuilder str = new StringBuilder();
 
-        if (buildPlan.getBuildPlanProvides() != null) {
-            for(BuildPlanProvide bpp: buildPlan.getBuildPlanProvides()) {
+        if (buildPlan.getProvides() != null) {
+            for(BuildPlanProvide bpp: buildPlan.getProvides()) {
                 str.append(bpp.toArray());
             }
         }
 
-        if (buildPlan.getBuildPlanRequires() != null) {
-            for (BuildPlanRequire bpr : buildPlan.getBuildPlanRequires()) {
+        if (buildPlan.getRequires() != null) {
+            for (BuildPlanRequire bpr : buildPlan.getRequires()) {
                 str.append(bpr.toArray());
             }
         }

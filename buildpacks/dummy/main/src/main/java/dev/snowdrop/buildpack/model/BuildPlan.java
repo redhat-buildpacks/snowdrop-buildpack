@@ -1,30 +1,29 @@
 package dev.snowdrop.buildpack.model;
 
+import java.util.List;
+
 public class BuildPlan {
     private String path;
-    private BuildPlanRequire[] buildPlanRequires;
-    private BuildPlanProvide[] buildPlanProvides;
+    private List<BuildPlanRequire> requires;
+    private List<BuildPlanProvide> provides;
 
-    public BuildPlanRequire[] getBuildPlanRequires() {
-        return buildPlanRequires;
+    public List<BuildPlanRequire> getRequires() {
+        return requires;
+    }
+    public void setRequires(List<BuildPlanRequire> requires) {
+        this.requires = requires;
     }
 
-    public void setBuildPlanRequires(BuildPlanRequire[] buildPlanRequires) {
-        this.buildPlanRequires = buildPlanRequires;
+    public List<BuildPlanProvide> getProvides() {
+        return provides;
     }
-
-    public BuildPlanProvide[] getBuildPlanProvides() {
-        return buildPlanProvides;
-    }
-
-    public void setBuildPlanProvides(BuildPlanProvide[] buildPlanProvides) {
-        this.buildPlanProvides = buildPlanProvides;
+    public void setProvides(List<BuildPlanProvide> provides) {
+        this.provides = provides;
     }
 
     public String getPath() {
         return path;
     }
-
     public void setPath(String path) {
         this.path = path;
     }

@@ -4,6 +4,7 @@ import dev.snowdrop.buildpack.model.BuildPlanProvide;
 import dev.snowdrop.buildpack.model.BuildPlanRequire;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import static dev.snowdrop.buildpack.utils.TomlHandler.writeBuildPlan;
 
@@ -51,8 +52,8 @@ public class Detect extends BuildPacks {
 
         BuildPlan bp = new BuildPlan();
         bp.setPath(this.BUILD_PLAN);
-        bp.setBuildPlanProvides(new BuildPlanProvide[]{bpp});
-        bp.setBuildPlanRequires(new BuildPlanRequire[]{bpr});
+        bp.setProvides(new ArrayList<BuildPlanProvide>(){{ add(bpp); }});
+        bp.setRequires(new ArrayList<BuildPlanRequire>(){{ add(bpr); }});
         return bp;
     }
 

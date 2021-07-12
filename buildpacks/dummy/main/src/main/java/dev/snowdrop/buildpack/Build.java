@@ -1,7 +1,12 @@
 package dev.snowdrop.buildpack;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.dataformat.toml.TomlMapper;
 import dev.snowdrop.buildpack.model.BuildPlan;
 import dev.snowdrop.buildpack.model.BuildPlanRequire;
+
+import java.io.File;
+import java.io.IOException;
 
 import static dev.snowdrop.buildpack.App.LOG;
 import static dev.snowdrop.buildpack.utils.ProcessHandler.runtimeCmd;
@@ -30,6 +35,11 @@ public class Build extends BuildPacks {
         LOG.infof("## Platform dir: %s", this.PLATFORM_DIR);
         LOG.infof("## Build plan: %s", this.BUILD_PLAN);
         LOG.infof("## Working dir: %s", getWorkingDir());
+
+        LOG.info("## Calling step to read the TOML plan");
+        BuildPlan bp = readTomlFile();
+        LOG.info("## Reading TOML plan executed");
+
         // TODO : Implement the logic to perform a maven build
         /**
         LOG.infof("## Execute bash cmd: %s", cmd);
@@ -40,14 +50,9 @@ public class Build extends BuildPacks {
         return 0;
     }
 
-    private BuildPlan buildPlan() {
-        BuildPlanRequire bpr = new BuildPlanRequire();
-        bpr.setName("maven");
-
-        BuildPlan bp = new BuildPlan();
-        bp.setPath(this.BUILD_PLAN);
-        bp.setBuildPlanRequires(new BuildPlanRequire[]{bpr});
-        return bp;
+    public BuildPlan readTomlFile() throws Exception {
+        TomlMapper mapper = new TomlMapper();
+        return mapper.readerFor(BuildPlan.class)
+                .readValue(new File(BUILD_PLAN));
     }
-
 }
