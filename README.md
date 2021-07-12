@@ -11,8 +11,9 @@ Table of Contents
     * [Build a Spring Boot project using our builder](#build-a-spring-boot-project-using-our-builder)
     * [Test the image built](#test-the-image-built)
   * [Development of a Buildpacks using Quarkus and native build](#development-of-a-buildpacks-using-quarkus-and-native-build)
-    * [Instructions](#instructions)
-  * [Development](#development)
+      * [Instructions to compile the project as buildpack image](#instructions-to-compile-the-project-as-buildpack-image)
+      * [To play with the buildpack locally](#to-play-with-the-buildpack-locally)
+
 
 ## Introduction
 
@@ -114,7 +115,7 @@ public class App implements QuarkusApplication {
         }
 ```
 
-### Instructions
+### Instructions to compile the project as buildpack image
 
 - Launch first docker locally ;-)
 - To create the native executable of the `dummy` buildpacks, execute the following command under
@@ -135,9 +136,9 @@ mv main/target/main-runner bin/main
 ln -fs main bin/detect 
 ln -fs main bin/build 
 ```
-**Interesting**: All these instructions can be executed using the bash script `./scripts/build.sh`
+**IMPORTANT**: All these instructions can be executed using the bash script `./scripts/build.sh`
 
-- Package the `dummy` buildpack within the project's builder image
+- Package the `dummy` buildpack within the builder image
 ```bash
 pack builder create redhat/buildpacks-builder-maven-jvm:latest --config ./builders/maven-jvm/builder.toml
 ```
@@ -167,7 +168,3 @@ BP_CMD=echo "<phase>" // where <phase> is "detect" or "build"
 ```
 
 Enjoy :-)
-
-## Development
-
-More information about the CNCF Buildpacks project is available here: https://buildpacks.io/docs/
