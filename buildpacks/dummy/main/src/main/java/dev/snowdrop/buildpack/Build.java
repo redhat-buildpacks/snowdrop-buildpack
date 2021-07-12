@@ -31,7 +31,12 @@ public class Build extends BuildPacks {
         LOG.infof("## Build plan: %s", this.BUILD_PLAN);
         LOG.infof("## Working dir: %s", getWorkingDir());
         // TODO : Implement the logic to perform a maven build
-        // runtimeCmd("microdnf install -y maven");
+        /**
+        LOG.infof("## Execute bash cmd: %s", cmd);
+        runtimeCmd("whoami; id; cat /etc/passwd");
+        runtimeCmd("microdnf install -y perlx");
+        LOG.info("## Command bash executed");
+        **/
         return 0;
     }
 
