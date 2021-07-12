@@ -25,10 +25,10 @@ public class Detect extends BuildPacks {
     public int call() throws Exception {
         File pomFile = new File(getWorkingDir() + "/pom.xml");
 
-        LOG.infof("## Detect called :: Buildpack :: %s",getBuildpackDir());
-        LOG.info("## Platform dir: " + this.PLATFORM_DIR);
+        LOG.infof("## Detect called :: Buildpack :: %s", getBuildpackDir());
+        LOG.infof("## Platform dir: %s", this.PLATFORM_DIR);
         LOG.infof("## Build plan: %s", this.BUILD_PLAN);
-        LOG.info("## Working Directory = " + getWorkingDir());
+        LOG.infof("## Working Directory = %s", getWorkingDir());
 
         LOG.info("## Check if pom.xml exists");
         if (pomFile.isFile()) {

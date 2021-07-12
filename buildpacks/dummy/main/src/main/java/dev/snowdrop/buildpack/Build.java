@@ -4,6 +4,7 @@ import dev.snowdrop.buildpack.model.BuildPlan;
 import dev.snowdrop.buildpack.model.BuildPlanRequire;
 
 import static dev.snowdrop.buildpack.App.LOG;
+import static dev.snowdrop.buildpack.utils.ProcessHandler.runtimeCmd;
 
 public class Build extends BuildPacks {
     // A directory that may contain subdirectories representing each layer created by the buildpack in the final image or build cache.
@@ -25,11 +26,12 @@ public class Build extends BuildPacks {
 
     public int call() throws Exception {
         LOG.infof("## Build called :: Buildpack :: %s",getBuildpackDir());
-        LOG.infof("## Layers dir: %s" + this.LAYERS_DIR);
-        LOG.infof("## Platform dir: %s" + this.PLATFORM_DIR);
+        LOG.infof("## Layers dir: %s", this.LAYERS_DIR);
+        LOG.infof("## Platform dir: %s", this.PLATFORM_DIR);
         LOG.infof("## Build plan: %s", this.BUILD_PLAN);
         LOG.infof("## Working dir: %s", getWorkingDir());
         // TODO : Implement the logic to perform a maven build
+        // runtimeCmd("microdnf install -y maven");
         return 0;
     }
 
