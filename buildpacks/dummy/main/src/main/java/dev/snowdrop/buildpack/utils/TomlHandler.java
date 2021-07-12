@@ -7,6 +7,8 @@ import org.jboss.logging.Logger;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class TomlHandler {
     static final org.jboss.logging.Logger LOG = Logger.getLogger(TomlHandler.class);
@@ -35,6 +37,21 @@ public class TomlHandler {
         } catch (IOException e) {
             LOG.info("Error occurred !!");
             LOG.info(e.getMessage());
+        }
+    }
+
+    private static void printBuildPlan(String path) {
+        try {
+            // read all bytes
+            byte[] bytes = Files.readAllBytes(Paths.get(path));
+            LOG.info("File size: " + bytes.length);
+            // convert bytes to string
+            String content = new String(bytes);
+            // print contents
+            LOG.info(content);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }

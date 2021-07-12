@@ -4,9 +4,8 @@ import dev.snowdrop.buildpack.model.BuildPlan;
 import dev.snowdrop.buildpack.model.BuildPlanRequire;
 
 import static dev.snowdrop.buildpack.App.LOG;
-import static dev.snowdrop.buildpack.utils.TomlHandler.writeBuildPlan;
 
-public class Build {
+public class Build extends BuildPacks {
     // A directory that may contain subdirectories representing each layer created by the buildpack in the final image or build cache.
     private String LAYERS_DIR = "";
     // A directory containing platform provided configuration, such as environment variables.
@@ -14,9 +13,8 @@ public class Build {
     // A path to a file containing the Build Plan.
     private String BUILD_PLAN = "";
 
-    String CNB_BUILDPACK = System.getenv("CNB_BUILDPACK_DIR");
-
     public Build(String[] args) {
+        super();
         if (args.length < 3) {
             LOG.errorf("expected 3 arguments and received %d", args.length);
         }
@@ -26,11 +24,11 @@ public class Build {
     }
 
     public int call() throws Exception {
-        LOG.infof("## Build called :: Buildpack :: %s",CNB_BUILDPACK);
-        LOG.info("## Layers dir: " + this.LAYERS_DIR);
-        LOG.info("## Platform dir: " + this.PLATFORM_DIR);
-        LOG.infof("## Build plan: ", this.BUILD_PLAN);
-        //writeBuildPlan(buildPlan());
+        LOG.infof("## Build called :: Buildpack :: %s",getBuildpackDir());
+        LOG.infof("## Layers dir: %s" + this.LAYERS_DIR);
+        LOG.infof("## Platform dir: %s" + this.PLATFORM_DIR);
+        LOG.infof("## Build plan: %s", this.BUILD_PLAN);
+        LOG.infof("## Working dir: %s", getWorkingDir());
         return 0;
     }
 

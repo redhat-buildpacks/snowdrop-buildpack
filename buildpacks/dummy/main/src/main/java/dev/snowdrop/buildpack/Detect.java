@@ -4,21 +4,17 @@ import dev.snowdrop.buildpack.model.BuildPlanProvide;
 import dev.snowdrop.buildpack.model.BuildPlanRequire;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
-import static dev.snowdrop.buildpack.App.LOG;
-import static dev.snowdrop.buildpack.utils.ProcessHandler.runtimeCmd;
 import static dev.snowdrop.buildpack.utils.TomlHandler.writeBuildPlan;
 
-public class Detect {
+public class Detect extends BuildPacks {
     // A directory containing platform provided configuration, such as environment variables.
     private String PLATFORM_DIR = "";
     // A path to a file containing the Build Plan.
     private String BUILD_PLAN = "";
 
     public Detect(String[] args) {
+        super();
         if (args.length < 2) {
             LOG.errorf("expected 2 arguments and received %d", args.length);
         }
@@ -27,22 +23,17 @@ public class Detect {
     }
 
     public int call() throws Exception {
+        File pomFile = new File(getWorkingDir() + "/pom.xml");
 
-        String CNB_BUILDPACK = System.getenv("CNB_BUILDPACK_DIR");
-
-        String workingDir = System.getProperty("user.dir");
-        File pomFile = new File(workingDir + "/pom.xml");
-
-        LOG.infof("## Detect called :: Buildpack :: %s",CNB_BUILDPACK);
+        LOG.infof("## Detect called :: Buildpack :: %s",getBuildpackDir());
         LOG.info("## Platform dir: " + this.PLATFORM_DIR);
         LOG.infof("## Build plan: %s", this.BUILD_PLAN);
-        LOG.info("## Working Directory = " + workingDir);
+        LOG.info("## Working Directory = " + getWorkingDir());
 
         LOG.info("## Check if pom.xml exists");
         if (pomFile.isFile()) {
             LOG.info("pom.xml file is there ;-)");
-            //runtimeCmd("cat "+this.BUILD_PLAN);
-            //printBuildPlan();
+            //printBuildPlan(this.BUILD_PLAN);
             writeBuildPlan(buildPlan());
             return 0;
         } else {
@@ -55,25 +46,14 @@ public class Detect {
         BuildPlanProvide bpp = new BuildPlanProvide();
         bpp.setName("maven");
 
+        BuildPlanRequire bpr = new BuildPlanRequire();
+        bpr.setName("maven");
+
         BuildPlan bp = new BuildPlan();
         bp.setPath(this.BUILD_PLAN);
         bp.setBuildPlanProvides(new BuildPlanProvide[]{bpp});
+        bp.setBuildPlanRequires(new BuildPlanRequire[]{bpr});
         return bp;
-    }
-
-    private void printBuildPlan() {
-        try {
-            // read all bytes
-            byte[] bytes = Files.readAllBytes(Paths.get(this.BUILD_PLAN));
-            LOG.info("File size: " + bytes.length);
-            // convert bytes to string
-            String content = new String(bytes);
-            // print contents
-            LOG.info(content);
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
     }
 
 }

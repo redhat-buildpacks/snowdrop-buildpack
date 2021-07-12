@@ -14,7 +14,6 @@ import static java.lang.String.join;
 @ApplicationScoped
 @QuarkusMain
 public class App implements QuarkusApplication {
-
     static final Logger LOG = Logger.getLogger(App.class);
 
     public static void main(String[] argv) throws Exception {
