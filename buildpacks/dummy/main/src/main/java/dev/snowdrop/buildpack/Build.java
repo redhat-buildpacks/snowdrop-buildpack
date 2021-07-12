@@ -29,6 +29,7 @@ public class Build extends BuildPacks {
         LOG.infof("## Platform dir: %s" + this.PLATFORM_DIR);
         LOG.infof("## Build plan: %s", this.BUILD_PLAN);
         LOG.infof("## Working dir: %s", getWorkingDir());
+        // TODO : Implement the logic to perform a maven build
         return 0;
     }
 
