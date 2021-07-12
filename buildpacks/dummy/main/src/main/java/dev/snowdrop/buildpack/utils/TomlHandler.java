@@ -13,16 +13,26 @@ import java.nio.file.Paths;
 public class TomlHandler {
     static final org.jboss.logging.Logger LOG = Logger.getLogger(TomlHandler.class);
 
-    public static void writeTomlFile(BuildPlan buildPlan, String path) throws IOException {
+    public static void writePOJOToFile(String filePath, Object obj) throws Exception {
         TomlMapper mapper = new TomlMapper();
         mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        mapper.writeValue(new File(path),buildPlan);
+        mapper.writeValue(new File(filePath),obj);
     }
 
-    public static BuildPlan readTomlFile(String path) throws Exception {
+    public static String convertPOJOToString(Object obj) throws Exception {
         TomlMapper mapper = new TomlMapper();
-        return mapper.readerFor(BuildPlan.class)
-                .readValue(new File(path));
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        return mapper.writeValueAsString(obj);
+    }
+
+    public static <T> T convertFileToPOJO(String filePath, Class<?> target) throws Exception {
+        TomlMapper objectMapper = new TomlMapper();
+        return objectMapper.readValue(new File(filePath), objectMapper.getTypeFactory().constructType(Class.forName(target.getName())));
+    }
+
+    public static <T> T convertStringToPOJO(String content, Class<?> target) throws Exception {
+        TomlMapper objectMapper = new TomlMapper();
+        return objectMapper.readValue(content, objectMapper.getTypeFactory().constructType(Class.forName(target.getName())));
     }
 
     private static void printBuildPlan(String path) {

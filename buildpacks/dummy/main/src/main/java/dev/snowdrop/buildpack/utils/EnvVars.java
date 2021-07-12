@@ -1,6 +1,5 @@
 package dev.snowdrop.buildpack.utils;
 
-import dev.snowdrop.buildpack.App;
 import org.jboss.logging.Logger;
 
 import java.util.Map;

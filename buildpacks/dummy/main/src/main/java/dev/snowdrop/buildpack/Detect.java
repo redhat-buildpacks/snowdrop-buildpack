@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static dev.snowdrop.buildpack.utils.TomlHandler.writeTomlFile;
+import static dev.snowdrop.buildpack.utils.TomlHandler.writePOJOToFile;
 
 public class Detect extends BuildPacks {
     // A directory containing platform provided configuration, such as environment variables.
@@ -36,7 +36,7 @@ public class Detect extends BuildPacks {
         if (pomFile.isFile()) {
             LOG.info("pom.xml file is there ;-)");
             //printBuildPlan(this.BUILD_PLAN);
-            //writeTomlFile(buildPlan(),BUILD_PLAN);
+            writePOJOToFile(BUILD_PLAN,generateNewBuildPlan());
             return 0;
         } else {
             LOG.info("pom.xml file do not exist !");
@@ -44,7 +44,7 @@ public class Detect extends BuildPacks {
         }
     }
 
-    private BuildPlan buildPlan() {
+    private BuildPlan generateNewBuildPlan() {
         BuildPlanProvide bpp = new BuildPlanProvide();
         bpp.setName("maven");
         List<BuildPlanProvide> buildPlanProvides = new ArrayList<BuildPlanProvide>();

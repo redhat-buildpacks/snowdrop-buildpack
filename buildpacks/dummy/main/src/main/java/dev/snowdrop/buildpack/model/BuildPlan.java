@@ -1,14 +1,17 @@
 package dev.snowdrop.buildpack.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 import java.util.List;
 
 @RegisterForReflection
+@JsonIgnoreProperties
 public class BuildPlan {
     @JsonIgnore
     private String path;
+
     private List<BuildPlanRequire> requires;
     private List<BuildPlanProvide> provides;
 

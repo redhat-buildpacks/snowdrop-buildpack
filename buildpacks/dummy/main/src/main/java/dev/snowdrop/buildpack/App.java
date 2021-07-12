@@ -27,7 +27,7 @@ public class App implements QuarkusApplication {
             BP_CMD = "ps -eo command | grep '/bin/*'";
         }
         LOG.info("BP_CMD :" + BP_CMD);
-        LOG.infof("Arguments passed: %s",join(" ", args));
+        LOG.infof("## Arguments passed: %s",join(" ", args));
         LOG.info("## Env Var ...");
         printAllEnv();
 

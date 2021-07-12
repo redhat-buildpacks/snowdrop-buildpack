@@ -1,16 +1,9 @@
 package dev.snowdrop.buildpack;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.dataformat.toml.TomlMapper;
 import dev.snowdrop.buildpack.model.BuildPlan;
-import dev.snowdrop.buildpack.model.BuildPlanRequire;
 
-import java.io.File;
-import java.io.IOException;
-
-import static dev.snowdrop.buildpack.App.LOG;
 import static dev.snowdrop.buildpack.utils.ProcessHandler.runtimeCmd;
-import static dev.snowdrop.buildpack.utils.TomlHandler.readTomlFile;
+import static dev.snowdrop.buildpack.utils.TomlHandler.convertFileToPOJO;
 
 public class Build extends BuildPacks {
     // A directory that may contain subdirectories representing each layer created by the buildpack in the final image or build cache.
@@ -38,7 +31,8 @@ public class Build extends BuildPacks {
         LOG.infof("## Working dir: %s", getWorkingDir());
 
         LOG.info("## Calling step to read the TOML plan");
-        BuildPlan bp = readTomlFile(this.BUILD_PLAN);
+        // BuildPlan bp = convertFileToPOJO(this.BUILD_PLAN,BuildPlan.class);
+        runtimeCmd("cat " + BUILD_PLAN);
         LOG.info("## Reading TOML plan executed");
 
         // TODO : Implement the logic to perform a maven build
