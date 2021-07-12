@@ -5,8 +5,9 @@ import dev.snowdrop.buildpack.model.BuildPlanRequire;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
-import static dev.snowdrop.buildpack.utils.TomlHandler.writeBuildPlan;
+import static dev.snowdrop.buildpack.utils.TomlHandler.writeTomlFile;
 
 public class Detect extends BuildPacks {
     // A directory containing platform provided configuration, such as environment variables.
@@ -27,15 +28,15 @@ public class Detect extends BuildPacks {
         File pomFile = new File(getWorkingDir() + "/pom.xml");
 
         LOG.infof("## Detect called :: Buildpack :: %s", getBuildpackDir());
-        LOG.infof("## Platform dir: %s", this.PLATFORM_DIR);
-        LOG.infof("## Build plan: %s", this.BUILD_PLAN);
+        LOG.infof("## Platform dir: %s", PLATFORM_DIR);
+        LOG.infof("## Build plan: %s", BUILD_PLAN);
         LOG.infof("## Working Directory = %s", getWorkingDir());
 
         LOG.info("## Check if pom.xml exists");
         if (pomFile.isFile()) {
             LOG.info("pom.xml file is there ;-)");
             //printBuildPlan(this.BUILD_PLAN);
-            writeBuildPlan(buildPlan());
+            //writeTomlFile(buildPlan(),BUILD_PLAN);
             return 0;
         } else {
             LOG.info("pom.xml file do not exist !");
@@ -46,14 +47,22 @@ public class Detect extends BuildPacks {
     private BuildPlan buildPlan() {
         BuildPlanProvide bpp = new BuildPlanProvide();
         bpp.setName("maven");
+        List<BuildPlanProvide> buildPlanProvides = new ArrayList<BuildPlanProvide>();
+        buildPlanProvides.add(bpp);
 
         BuildPlanRequire bpr = new BuildPlanRequire();
         bpr.setName("maven");
+        List<BuildPlanRequire> buildPlanRequires = new ArrayList<BuildPlanRequire>();
+        buildPlanRequires.add(bpr);
 
         BuildPlan bp = new BuildPlan();
         bp.setPath(this.BUILD_PLAN);
-        bp.setProvides(new ArrayList<BuildPlanProvide>(){{ add(bpp); }});
-        bp.setRequires(new ArrayList<BuildPlanRequire>(){{ add(bpr); }});
+
+        bp.setProvides(buildPlanProvides);
+        bp.setRequires(buildPlanRequires);
+
+        //bp.setProvides(new ArrayList<BuildPlanProvide>(){{ add(bpp); }});
+        //bp.setRequires(new ArrayList<BuildPlanRequire>(){{ add(bpr); }});
         return bp;
     }
 

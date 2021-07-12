@@ -1,11 +1,11 @@
 package dev.snowdrop.buildpack.utils;
 
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.toml.TomlMapper;
 import dev.snowdrop.buildpack.model.BuildPlan;
-import dev.snowdrop.buildpack.model.BuildPlanProvide;
-import dev.snowdrop.buildpack.model.BuildPlanRequire;
 import org.jboss.logging.Logger;
 
-import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -13,31 +13,16 @@ import java.nio.file.Paths;
 public class TomlHandler {
     static final org.jboss.logging.Logger LOG = Logger.getLogger(TomlHandler.class);
 
-    public static void writeBuildPlan(BuildPlan buildPlan) {
-        StringBuilder str = new StringBuilder();
+    public static void writeTomlFile(BuildPlan buildPlan, String path) throws IOException {
+        TomlMapper mapper = new TomlMapper();
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        mapper.writeValue(new File(path),buildPlan);
+    }
 
-        if (buildPlan.getProvides() != null) {
-            for(BuildPlanProvide bpp: buildPlan.getProvides()) {
-                str.append(bpp.toArray());
-            }
-        }
-
-        if (buildPlan.getRequires() != null) {
-            for (BuildPlanRequire bpr : buildPlan.getRequires()) {
-                str.append(bpr.toArray());
-            }
-        }
-
-        LOG.info("Build Plan generated: " + str.toString());
-
-        try {
-            FileWriter myWriter = new FileWriter(buildPlan.getPath());
-            myWriter.write(str.toString());
-            myWriter.close();
-        } catch (IOException e) {
-            LOG.info("Error occurred !!");
-            LOG.info(e.getMessage());
-        }
+    public static BuildPlan readTomlFile(String path) throws Exception {
+        TomlMapper mapper = new TomlMapper();
+        return mapper.readerFor(BuildPlan.class)
+                .readValue(new File(path));
     }
 
     private static void printBuildPlan(String path) {

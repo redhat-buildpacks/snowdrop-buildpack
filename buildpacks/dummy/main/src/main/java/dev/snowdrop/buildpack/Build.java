@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import static dev.snowdrop.buildpack.App.LOG;
 import static dev.snowdrop.buildpack.utils.ProcessHandler.runtimeCmd;
+import static dev.snowdrop.buildpack.utils.TomlHandler.readTomlFile;
 
 public class Build extends BuildPacks {
     // A directory that may contain subdirectories representing each layer created by the buildpack in the final image or build cache.
@@ -37,7 +38,7 @@ public class Build extends BuildPacks {
         LOG.infof("## Working dir: %s", getWorkingDir());
 
         LOG.info("## Calling step to read the TOML plan");
-        BuildPlan bp = readTomlFile();
+        BuildPlan bp = readTomlFile(this.BUILD_PLAN);
         LOG.info("## Reading TOML plan executed");
 
         // TODO : Implement the logic to perform a maven build
@@ -48,11 +49,5 @@ public class Build extends BuildPacks {
         LOG.info("## Command bash executed");
         **/
         return 0;
-    }
-
-    public BuildPlan readTomlFile() throws Exception {
-        TomlMapper mapper = new TomlMapper();
-        return mapper.readerFor(BuildPlan.class)
-                .readValue(new File(BUILD_PLAN));
     }
 }
