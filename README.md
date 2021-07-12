@@ -146,6 +146,28 @@ pack builder create redhat/buildpacks-builder-maven-jvm:latest --config ./builde
 pack build java-dummy-app --builder redhat/buildpacks-builder-maven-jvm:latest -p ./apps/snowdrop-sample-app -v -b dev.snowdrop.buildpacks.dummy
 ```
 
+### To play with the buildpack locally
+
+To debug the `buildpacks` locally for the `detect` or `build` phase, add the following `ENV` variables:
+
+```text
+BP_WORKSPACE=./apps/snowdrop-sample-app // Location of the application you would like to buildpacks 
+CNB_BUILDPACK=./buildpacks/dummy        // Path to the buildpacks
+```
+Next, launch the Main application `dev.snowdrop.buildpack.App` where you pass as parameters the needed arguments 
+
+```text
+./tmp/platform ./tmp/build.toml // Arguments for the detect phase: <platform_dir> <build.toml>
+./tmp/layers/dummy /tmp/platform /tmp/plan.toml  // arguments for the build phase: <layers_dir> <platform_dir> <build.toml> 
+```
+and you set the `BP_CMD` ENV variable which emulates the call to either the `detect` or `build` phase
+
+```text
+BP_CMD=echo "<phase>" // where <phase> is "detect" or "build"
+```
+
+Enjoy :-)
+
 ## Development
 
 More information about the CNCF Buildpacks project is available here: https://buildpacks.io/docs/
