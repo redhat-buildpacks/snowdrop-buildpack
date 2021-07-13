@@ -3,6 +3,7 @@ import dev.snowdrop.buildpack.model.*;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static dev.snowdrop.buildpack.utils.TomlHandler.writePOJOToFile;
@@ -47,6 +48,7 @@ public class Detect extends BuildPacks {
                 .withPath(this.BUILD_PLAN)
                 .addNewRequire()
                     .withName("maven")
+                    .addToMetadata("version","3.6.4")
                 .endRequire()
                 .addNewProvide()
                     .withName("")

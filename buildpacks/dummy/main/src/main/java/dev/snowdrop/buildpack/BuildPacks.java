@@ -13,7 +13,7 @@ public abstract class BuildPacks {
             WorkingDir = "/workspace";
             LOG.warn("No BP_WORKSPACE env var provided. So, we will set a default path to /workspace !");
         }
-        BuildpackDir = System.getenv("CNB_BUILDPACK");
+        BuildpackDir = System.getenv("CNB_BUILDPACK_DIR");
         if (BuildpackDir == null) {
             LOG.errorf("CNB_BUILDPACK_DIR Env variable do not exist !");
         }

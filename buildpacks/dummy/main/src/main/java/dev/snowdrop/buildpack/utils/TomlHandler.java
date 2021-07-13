@@ -2,7 +2,6 @@ package dev.snowdrop.buildpack.utils;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
-import dev.snowdrop.buildpack.model.BuildPlan;
 import org.jboss.logging.Logger;
 
 import java.io.File;
