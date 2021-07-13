@@ -30,7 +30,11 @@
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-toml</artifactId>
-            <version>2.12.4</version>
+        </dependency>
+        <!-- Generate Java Model classes supporting the Builder Pattern -->
+        <dependency>
+            <groupId>io.sundr</groupId>
+            <artifactId>sundr-model</artifactId>
         </dependency>
 
         <!-- Testing -->
