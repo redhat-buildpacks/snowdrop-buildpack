@@ -9,7 +9,9 @@ import java.util.List;
 
 @RegisterForReflection(classNames = {
         "dev.snowdrop.buildpack.model.BuildPlan",
-        "dev.snowdrop.buildpack.fluent.EditableBuildPlan"}
+        "dev.snowdrop.buildpack.model.BuildPlanProvide",
+        "dev.snowdrop.buildpack.model.BuildPlanRequire",
+        "dev.snowdrop.buildpack.model.EditableBuildPlan"}
 )
 @JsonIgnoreProperties
 @Buildable
