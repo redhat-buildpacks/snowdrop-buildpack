@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static dev.snowdrop.buildpack.utils.ProcessHandler.runtimeCmd;
 import static dev.snowdrop.buildpack.utils.TomlHandler.writePOJOToFile;
 
 public class Detect extends BuildPacks {
@@ -35,6 +36,7 @@ public class Detect extends BuildPacks {
         if (pomFile.isFile()) {
             LOG.info("pom.xml file is there ;-)");
             writePOJOToFile(BUILD_PLAN,createBuildPlan());
+            runtimeCmd("cat " + this.BUILD_PLAN);
             return 0;
         } else {
             LOG.info("pom.xml file do not exist !");

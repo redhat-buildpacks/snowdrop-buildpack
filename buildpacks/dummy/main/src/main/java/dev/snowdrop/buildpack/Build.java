@@ -37,6 +37,7 @@ public class Build extends BuildPacks {
         //
         // BuildPlan bp = convertFileToPOJO(this.BUILD_PLAN,BuildPlan.class);
         // runtimeCmd("cat " + BUILD_PLAN);
+        runtimeCmd("cat " + this.BUILD_PLAN);
         LOG.info("## Reading TOML plan executed");
 
         // TODO : Implement the logic to perform a maven build
