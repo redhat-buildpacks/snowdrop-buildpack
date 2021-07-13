@@ -31,8 +31,12 @@ public class Build extends BuildPacks {
         LOG.infof("## Working dir: %s", getWorkingDir());
 
         LOG.info("## Calling step to read the TOML plan");
+        // TODO: Review spec as we dont consume the same object as what is produced by the detect
+        // Detect produces a "Build pan" : https://github.com/buildpacks/spec/blob/main/buildpack.md#build-plan-toml
+        // Build consumes a "Buildpack Plan" : https://github.com/buildpacks/spec/blob/main/buildpack.md#buildpack-plan-toml
+        //
         // BuildPlan bp = convertFileToPOJO(this.BUILD_PLAN,BuildPlan.class);
-        runtimeCmd("cat " + BUILD_PLAN);
+        // runtimeCmd("cat " + BUILD_PLAN);
         LOG.info("## Reading TOML plan executed");
 
         // TODO : Implement the logic to perform a maven build
