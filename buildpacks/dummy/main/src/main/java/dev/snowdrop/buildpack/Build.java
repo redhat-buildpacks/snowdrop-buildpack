@@ -1,5 +1,6 @@
 package dev.snowdrop.buildpack;
 
+import dev.snowdrop.buildpack.model.BuildPackPlan;
 import dev.snowdrop.buildpack.model.BuildPlan;
 
 import static dev.snowdrop.buildpack.utils.ProcessHandler.runtimeCmd;
@@ -34,10 +35,10 @@ public class Build extends BuildPacks {
         // TODO: Review spec as we dont consume the same object as what is produced by the detect
         // Detect produces a "Build pan" : https://github.com/buildpacks/spec/blob/main/buildpack.md#build-plan-toml
         // Build consumes a "Buildpack Plan" : https://github.com/buildpacks/spec/blob/main/buildpack.md#buildpack-plan-toml
-        //
-        // BuildPlan bp = convertFileToPOJO(this.BUILD_PLAN,BuildPlan.class);
-        // runtimeCmd("cat " + BUILD_PLAN);
         runtimeCmd("cat " + this.BUILD_PLAN);
+        BuildPackPlan bpp = convertFileToPOJO(this.BUILD_PLAN,BuildPackPlan.class);
+        LOG.infof("## BuildPack Plan - Entry Name: %s", bpp.getEntries().get(0).getName());
+        LOG.infof("## BuildPack Plan - Entry Version: %s", bpp.getEntries().get(0).getMetadata().get("version"));
         LOG.info("## Reading TOML plan executed");
 
         // TODO : Implement the logic to perform a maven build
