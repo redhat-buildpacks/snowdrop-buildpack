@@ -13,7 +13,7 @@ public class TestBuildPlanToml {
 
     @Test
     public void testConvertBuildPlanToTomlString() throws Exception {
-        String result = "requires = [{metadata = {version = '3.6.4'}, name = 'maven'}]\n" +
+        String result = "requires = [{name = 'maven', metadata = {version = '3.6.4'}}]\n" +
                 "provides = [{name = 'maven'}]\n";
         BuildPlanBuilder buildPlanBuilder = new BuildPlanBuilder();
         buildPlanBuilder

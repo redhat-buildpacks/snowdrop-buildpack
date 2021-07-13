@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+// TODO: Update the documentation to use Makefile instead of this file
+
 set -exuo pipefail
 
-echo "Generate an executable of the project"
-mvn clean package -Pnative \
+echo "Generate a native executable of the project"
+mvn package -Pnative \
     -Dquarkus.native.container-build=true \
     -Dquarkus.banner.enabled=false \
     -Dquarkus.package.output-name=main \

@@ -1,10 +1,8 @@
 package dev.snowdrop.buildpack;
 import dev.snowdrop.buildpack.model.*;
+import dev.snowdrop.buildpack.model.BuildPlanBuilder;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import static dev.snowdrop.buildpack.utils.ProcessHandler.runtimeCmd;
 import static dev.snowdrop.buildpack.utils.TomlHandler.writePOJOToFile;
@@ -53,7 +51,7 @@ public class Detect extends BuildPacks {
                     .addToMetadata("version","3.6.4")
                 .endRequire()
                 .addNewProvide()
-                    .withName("")
+                    .withName("maven")
                 .endProvide();
 
         return buildPlanBuilder.build();

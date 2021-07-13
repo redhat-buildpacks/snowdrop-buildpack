@@ -1,29 +1,29 @@
 package dev.snowdrop.buildpack.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.sundr.builder.annotations.Buildable;
 
-import java.util.List;
 import java.util.Map;
 
 @Buildable
+@JsonPropertyOrder({ "name", "metadata" })
 public class BuildPlanRequire {
-    private String Name;
-    private Map<String, Object> Metadata;
+    private String name;
+    private Map<String, Object> metadata;
 
     public BuildPlanRequire() {}
 
     public String getName() {
-        return Name;
+        return name;
     }
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public Map<String, Object> getMetadata() {
-        return Metadata;
+        return metadata;
     }
     public void setMetadata(Map<String, Object> metadata) {
-        Metadata = metadata;
+        this.metadata = metadata;
     }
 }

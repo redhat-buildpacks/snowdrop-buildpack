@@ -7,7 +7,10 @@ import io.sundr.builder.annotations.Buildable;
 
 import java.util.List;
 
-@RegisterForReflection
+@RegisterForReflection(classNames = {
+        "dev.snowdrop.buildpack.model.BuildPlan",
+        "dev.snowdrop.buildpack.fluent.EditableBuildPlan"}
+)
 @JsonIgnoreProperties
 @Buildable
 public class BuildPlan {
