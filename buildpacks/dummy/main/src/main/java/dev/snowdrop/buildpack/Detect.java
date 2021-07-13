@@ -45,15 +45,12 @@ public class Detect extends BuildPacks {
         BuildPlanBuilder buildPlanBuilder = new BuildPlanBuilder();
         buildPlanBuilder
                 .withPath(this.BUILD_PLAN)
-                .withProvides(
-                        new BuildPlanProvideBuilder()
-                                .withName("maven")
-                                .build())
-                .withRequires(
-                        new BuildPlanRequireBuilder()
-                                .withName("maven")
-                                .build()
-                );
+                .addNewRequire()
+                    .withName("maven")
+                .endRequire()
+                .addNewProvide()
+                    .withName("")
+                .endProvide();
 
         return buildPlanBuilder.build();
     }
