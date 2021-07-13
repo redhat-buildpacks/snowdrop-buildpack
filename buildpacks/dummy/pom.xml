@@ -39,7 +39,7 @@
             </dependency>
             <dependency>
                 <groupId>io.sundr</groupId>
-                <artifactId>sundr-model</artifactId>
+                <artifactId>builder-annotations</artifactId>
                 <version>${sundrio.version}</version>
             </dependency>
         </dependencies>

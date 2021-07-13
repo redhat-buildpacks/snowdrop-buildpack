@@ -3,11 +3,13 @@ package dev.snowdrop.buildpack.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.quarkus.runtime.annotations.RegisterForReflection;
+import io.sundr.builder.annotations.Buildable;
 
 import java.util.List;
 
 @RegisterForReflection
 @JsonIgnoreProperties
+@Buildable
 public class BuildPlan {
     @JsonIgnore
     private String path;

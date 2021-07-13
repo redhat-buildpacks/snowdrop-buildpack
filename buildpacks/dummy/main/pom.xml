@@ -34,7 +34,7 @@
         <!-- Generate Java Model classes supporting the Builder Pattern -->
         <dependency>
             <groupId>io.sundr</groupId>
-            <artifactId>sundr-model</artifactId>
+            <artifactId>builder-annotations</artifactId>
         </dependency>
 
         <!-- Testing -->
