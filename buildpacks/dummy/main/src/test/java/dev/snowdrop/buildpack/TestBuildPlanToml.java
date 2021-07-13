@@ -26,7 +26,6 @@ public class TestBuildPlanToml {
                      .withName("maven")
                 .endProvide();
 
-
         String toml = convertPOJOToString(buildPlanBuilder.build());
         assertNotNull(toml);
         assertEquals(result,toml);
