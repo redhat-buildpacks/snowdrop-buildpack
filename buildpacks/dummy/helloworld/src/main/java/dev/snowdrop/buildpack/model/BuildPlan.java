@@ -2,17 +2,10 @@ package dev.snowdrop.buildpack.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.quarkus.runtime.annotations.RegisterForReflection;
 import io.sundr.builder.annotations.Buildable;
 
 import java.util.List;
 
-@RegisterForReflection(classNames = {
-        "dev.snowdrop.buildpack.dev.snowdrop.buildpack.model.BuildPlan",
-        "dev.snowdrop.buildpack.dev.snowdrop.buildpack.model.BuildPlanProvide",
-        "dev.snowdrop.buildpack.dev.snowdrop.buildpack.model.BuildPlanRequire",
-        "dev.snowdrop.buildpack.dev.snowdrop.buildpack.model.EditableBuildPlan"}
-)
 @JsonIgnoreProperties
 @Buildable
 public class BuildPlan {

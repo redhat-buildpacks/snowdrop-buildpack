@@ -8,7 +8,7 @@ Table of Contents
   * [Prerequisite](#prerequisite)
   * [Installation](#installation)
   * [Testing](#testing)
-    * [Build a Spring Boot project using our builder](#build-a-spring-boot-project-using-our-builder)
+    * [dev.snowdrop.buildpack.Build a Spring Boot project using our builder](#build-a-spring-boot-project-using-our-builder)
     * [Test the image built](#test-the-image-built)
   * [Development of a Buildpacks using Quarkus and native build](#development-of-a-buildpacks-using-quarkus-and-native-build)
     * [Instructions to compile the project as buildpack image](#instructions-to-compile-the-project-as-buildpack-image)
@@ -47,7 +47,7 @@ To create the `builder image` of the Snowdrop buildpacks project, clone this rep
 
 ## Testing
 
-### Build a Spring Boot project using our builder
+### dev.snowdrop.buildpack.Build a Spring Boot project using our builder
 
 To test the `builder` on a Spring Boot application, execute the following command
 top of the example [project](./apps) with the help of the `pack` tool.
@@ -83,18 +83,18 @@ lrwxr-xr-x  1 cmoullia  staff         4 Jul  9 15:16 detect -> main
 -rwxr-xr-x  1 cmoullia  staff  29380000 Jul  9 15:16 main
 ```
 
-The java class `App` is the core of the application. Quarkus will use the `@QuarkusMain`
+The java class `dev.snowdrop.buildpack.App` is the core of the application. Quarkus will use the `@QuarkusMain`
 annotation to starts it. When the lifecycle creator will call it, then we will determine the parameters
 of the command line as defined within the process created.
-A `Detect` or `Build` class is instantiated according to the command, and the process continues.
+A `dev.snowdrop.buildpack.Detect` or `dev.snowdrop.buildpack.Build` class is instantiated according to the command, and the process continues.
 
 ```java
 @ApplicationScoped
 @QuarkusMain
-public class App implements QuarkusApplication {
+public class dev.snowdrop.buildpack.App implements QuarkusApplication {
 
     public static void main(String[] argv) throws Exception {
-        Quarkus.run(App.class, argv);
+        Quarkus.run(dev.snowdrop.buildpack.App.class, argv);
     }
 
     @Override
@@ -105,11 +105,11 @@ public class App implements QuarkusApplication {
         switch (ProcessHandler.commandProcessed(BP_CMD)) {
             case "detect":
                 LOG.info("## Command called is /bin/detect");
-                Detect d = new Detect();
+                dev.snowdrop.buildpack.Detect d = new dev.snowdrop.buildpack.Detect();
                 return d.call();
             case "build":
                 LOG.info("## Command called is /bin/build");
-                Build b = new Build();
+                dev.snowdrop.buildpack.Build b = new dev.snowdrop.buildpack.Build();
                 return b.call();
             case "": new Exception("## Unsupported command called !");
         }
@@ -142,7 +142,7 @@ ln -fs main bin/build
 ```bash
 pack builder create redhat/buildpacks-builder-maven-jvm:latest --config ./builders/maven-jvm/builder.toml
 ```
-- Build now a Spring Boot's application packaged within this project using the builder image and the buildpacks `dummy`
+- dev.snowdrop.buildpack.Build now a Spring Boot's application packaged within this project using the builder image and the buildpacks `dummy`
 ```bash
 pack build java-dummy-app --builder redhat/buildpacks-builder-maven-jvm:latest -p ./apps/snowdrop-sample-app -v -b dev.snowdrop.buildpacks.dummy
 ```
@@ -155,7 +155,7 @@ To debug the `buildpacks` locally for the `detect` or `build` phase, add the fol
 BP_WORKSPACE=./apps/snowdrop-sample-app // Location of the application you would like to buildpacks 
 CNB_BUILDPACK=./buildpacks/dummy        // Path to the buildpacks
 ```
-Next, launch the Main application `dev.snowdrop.buildpack.App` where you pass as parameters the needed arguments 
+Next, launch the Main application `dev.snowdrop.buildpack.dev.snowdrop.buildpack.App` where you pass as parameters the needed arguments 
 
 ```text
 ./tmp/platform ./tmp/build.toml // Arguments for the detect phase: <platform_dir> <build.toml>

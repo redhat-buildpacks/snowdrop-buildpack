@@ -7,9 +7,9 @@ import io.sundr.builder.annotations.Buildable;
 import java.util.List;
 
 @RegisterForReflection(classNames = {
-        "dev.snowdrop.buildpack.model.BuildPackPlan",
-        "dev.snowdrop.buildpack.model.Entries",
-        "dev.snowdrop.buildpack.model.EditableBuildPAckPlan"}
+        "dev.snowdrop.buildpack.dev.snowdrop.buildpack.model.BuildPackPlan",
+        "dev.snowdrop.buildpack.dev.snowdrop.buildpack.model.Entries",
+        "dev.snowdrop.buildpack.dev.snowdrop.buildpack.model.EditableBuildPAckPlan"}
 )
 @Buildable
 public class BuildPackPlan {

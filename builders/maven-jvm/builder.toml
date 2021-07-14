@@ -5,7 +5,7 @@ uri = "../../buildpacks/maven"
 [[buildpacks]]
 uri = "../../buildpacks/dummy"
 
-# Build pack conteant could also be defned as a OCI image uri
+# dev.snowdrop.buildpack.Build pack conteant could also be defned as a OCI image uri
 # if the buildpack hs been created as OCI image "pack buildpack package snowdrop/maven-bp --config ./package.toml"
 # uri = "docker://snowdrop/maven-bp"
 
