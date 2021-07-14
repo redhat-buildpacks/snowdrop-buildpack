@@ -1,8 +1,9 @@
-SHELL       := /bin/bash
-CURRENT_DIR := $(shell pwd)
-TARGET_JAR  := buildpack-app-1.0-SNAPSHOT-jar-with-dependencies.jar
-APP_NAME    := main
-CLASS_NAME  := dev.snowdrop.buildpack.App
+SHELL         := /bin/bash
+CURRENT_DIR   := $(shell pwd)
+MAVEN_PROJECT := main-java
+TARGET_JAR    := $(MAVEN_PROJECT)-1.0-SNAPSHOT-jar-with-dependencies.jar
+APP_NAME      := main
+CLASS_NAME    := dev.snowdrop.buildpack.App
 
 all: compile native-build package-app launch
 
