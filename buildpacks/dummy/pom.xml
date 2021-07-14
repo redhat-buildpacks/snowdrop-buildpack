@@ -9,8 +9,8 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <modules>
-        <module>main</module>
-        <module>helloworld</module>
+        <module>main-quarkus</module>
+        <module>main-java</module>
     </modules>
 
     <properties>
