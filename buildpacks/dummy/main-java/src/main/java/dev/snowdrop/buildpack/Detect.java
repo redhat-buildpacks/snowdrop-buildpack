@@ -17,7 +17,7 @@ public class Detect extends BuildPacks {
     public Detect(String[] args) {
         super();
         if (args.length < 2) {
-            LOG.warning("expected 2 arguments and received " + args.length);
+            LOG.severe("expected 2 arguments and received " + args.length);
         }
         this.PLATFORM_DIR = args[0];
         this.BUILD_PLAN = args[1];
