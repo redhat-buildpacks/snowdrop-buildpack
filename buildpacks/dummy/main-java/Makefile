@@ -1,7 +1,8 @@
 SHELL         := /bin/bash
 CURRENT_DIR   := $(shell pwd)
 MAVEN_PROJECT := main-java
-TARGET_JAR    := $(MAVEN_PROJECT)-1.0-SNAPSHOT-jar-with-dependencies.jar
+VERSION       := 1.0.0-SNAPSHOT
+TARGET_JAR    := $(MAVEN_PROJECT)-$(VERSION)-jar-with-dependencies.jar
 APP_NAME      := main
 CLASS_NAME    := dev.snowdrop.buildpack.App
 
