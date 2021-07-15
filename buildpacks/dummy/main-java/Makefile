@@ -6,7 +6,7 @@ TARGET_JAR    := $(MAVEN_PROJECT)-$(VERSION)-jar-with-dependencies.jar
 APP_NAME      := main
 CLASS_NAME    := dev.snowdrop.buildpack.App
 
-all: compile native-build package-app launch
+all: compile native-build package-app
 
 compile:
 	mvn clean package
@@ -26,4 +26,9 @@ package-app:
 	docker build -t snowdrop/native-app . -f native.Dockerfile
 
 launch:
-	docker run snowdrop/native-app
+	mkdir -p target/platform
+	docker run -it \
+	-e BP_CMD='echo "detect"' \
+	-e CNB_BUILDPACK_DIR="dev.snowdrop.dummy" \
+	-v $(CURRENT_DIR)/target:/workspace \
+	snowdrop/native-app /workspace/platform/ /workspace/build.toml
