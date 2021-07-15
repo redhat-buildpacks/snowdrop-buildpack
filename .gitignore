@@ -29,3 +29,7 @@ target/
 # Others
 tmp/
 /buildpacks/dummy/bin/
+/buildpacks/dummy/main-java/build
+/buildpacks/dummy/main-java/detect
+/buildpacks/dummy/main-java/main
+/buildpacks/dummy/main-java/main.build_artifacts.txt
