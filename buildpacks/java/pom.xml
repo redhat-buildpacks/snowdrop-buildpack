@@ -7,11 +7,11 @@
     <artifactId>buildpack</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
-    <name>Buildpack :: Dummy :: Project</name>
+    <name>Buildpack :: Java :: Project</name>
 
     <modules>
-        <module>main-quarkus</module>
-        <module>main-java</module>
+        <module>jdk</module>
+        <module>quarkus</module>
     </modules>
 
     <properties>

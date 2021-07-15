@@ -120,7 +120,7 @@ public class dev.snowdrop.buildpack.App implements QuarkusApplication {
 - Launch first docker locally ;-)
 - To create the native executable of the `dummy` buildpacks, execute the following command under
 ```bash
-cd buildpacks/dummy
+cd buildpacks/java/quarkus
 mvn clean package -Pnative \
     -Dquarkus.native.container-build=true \
     -Dquarkus.banner.enabled=false \
@@ -129,14 +129,14 @@ mvn clean package -Pnative \
 ```
 - Rename it and move it under the `bin` folder
 ```bash
-mv main/target/main-runner bin/main
+mv ./target/main-runner ../dummy/bin/main
 ```  
 - Create the symbolic links pointing to the main application
 ```bash
-ln -fs main bin/detect 
-ln -fs main bin/build 
+ln -fs main ../dummy/bin/detect 
+ln -fs main ../dummy/bin/build 
 ```
-**IMPORTANT**: All these instructions can be executed using the bash script `./scripts/build.sh`
+**IMPORTANT**: All these instructions can be executed using the `Makefile` and command `make all`
 
 - Package the `dummy` buildpack within the builder image
 ```bash
