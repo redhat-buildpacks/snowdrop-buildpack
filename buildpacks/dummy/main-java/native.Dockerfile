@@ -1,3 +1,9 @@
-FROM scratch
+FROM alpine:3.14
+
+RUN apk add bash
+
+VOLUME /workspace
+WORKDIR /workspace
+
 COPY main /main
-CMD ["/main"]
+ENTRYPOINT ["/main"]
