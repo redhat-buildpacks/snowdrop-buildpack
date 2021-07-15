@@ -1,13 +1,14 @@
 package dev.snowdrop.buildpack;
 
 import dev.snowdrop.buildpack.utils.ProcessHandler;
-import org.jboss.logging.Logger;
+
+import java.util.logging.Logger;
 
 import static dev.snowdrop.buildpack.utils.EnvVars.printAllEnv;
 import static java.lang.String.join;
 
 public class App {
-    static final Logger LOG = Logger.getLogger(App.class);
+    static final Logger LOG = Logger.getLogger(App.class.getName());
 
     public static void main(String[] argv) throws Exception {
         App app = new App();
@@ -20,7 +21,7 @@ public class App {
             BP_CMD = "ps -eo command | grep '/bin/*'";
         }
         LOG.info("BP_CMD :" + BP_CMD);
-        LOG.infof("## Arguments passed: %s",join(" ", args));
+        LOG.info("## Arguments passed: " + join(" ", args));
         LOG.info("## Env Var ...");
         printAllEnv();
 

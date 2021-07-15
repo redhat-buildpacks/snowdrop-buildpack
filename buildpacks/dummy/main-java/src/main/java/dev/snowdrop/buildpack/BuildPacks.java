@@ -1,9 +1,9 @@
 package dev.snowdrop.buildpack;
 
-import org.jboss.logging.Logger;
+import java.util.logging.Logger;
 
 public abstract class BuildPacks {
-    static final Logger LOG = Logger.getLogger(BuildPacks.class);
+    static final Logger LOG = Logger.getLogger(BuildPacks.class.getName());
     private String WorkingDir;
     private String BuildpackDir;
 
@@ -11,11 +11,11 @@ public abstract class BuildPacks {
         WorkingDir = System.getenv("BP_WORKSPACE");
         if (WorkingDir == null) {
             WorkingDir = "/workspace";
-            LOG.warn("No BP_WORKSPACE env var provided. So, we will set a default path to /workspace !");
+            LOG.warning("No BP_WORKSPACE env var provided. So, we will set a default path to /workspace !");
         }
         BuildpackDir = System.getenv("CNB_BUILDPACK_DIR");
         if (BuildpackDir == null) {
-            LOG.errorf("CNB_BUILDPACK_DIR Env variable do not exist !");
+            LOG.warning("CNB_BUILDPACK_DIR Env variable do not exist !");
         }
     }
 

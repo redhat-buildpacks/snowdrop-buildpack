@@ -2,15 +2,15 @@ package dev.snowdrop.buildpack.utils;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
-import org.jboss.logging.Logger;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.logging.Logger;
 
 public class TomlHandler {
-    static final org.jboss.logging.Logger LOG = Logger.getLogger(TomlHandler.class);
+    static final Logger LOG = Logger.getLogger(TomlHandler.class.getName());
 
     public static void writePOJOToFile(String filePath, Object obj) throws Exception {
         TomlMapper mapper = new TomlMapper();

@@ -1,20 +1,19 @@
 package dev.snowdrop.buildpack.utils;
 
-import org.jboss.logging.Logger;
-
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class ProcessHandler {
-    static final org.jboss.logging.Logger LOG = Logger.getLogger(ProcessHandler.class);
+    static final Logger LOG = Logger.getLogger(ProcessHandler.class.getName());
 
     public static void runtimeCmd(String cmd) throws IOException, InterruptedException {
         Process p = Runtime.getRuntime().exec(new String[]{"bash", "-c", cmd});
 
         // Log stdout
         Scanner s = new Scanner(p.getInputStream());
-        LOG.infof("Stdout of the command executed: %s", cmd);
+        LOG.info("Stdout of the command executed: " + cmd);
         while(s.hasNext()) {
             LOG.info(s.nextLine());
         };
@@ -22,7 +21,7 @@ public class ProcessHandler {
         // TODO: Review the code to LOG if only stderr is not empty
         // Log stderr
         s = new Scanner(p.getErrorStream());
-        LOG.infof("Stderr of the command executed: %s", cmd);
+        LOG.info("Stderr of the command executed: " + cmd);
         while(s.hasNext()) {
             LOG.info(s.nextLine());
         };

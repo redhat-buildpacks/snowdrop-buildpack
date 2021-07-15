@@ -16,7 +16,7 @@ public class Build extends BuildPacks {
     public Build(String[] args) {
         super();
         if (args.length < 3) {
-            LOG.errorf("expected 3 arguments and received %d", args.length);
+            LOG.warning("expected 3 arguments and received " + args.length);
         }
         this.LAYERS_DIR = args[0];
         this.PLATFORM_DIR = args[1];
@@ -24,11 +24,11 @@ public class Build extends BuildPacks {
     }
 
     public int call() throws Exception {
-        LOG.infof("## dev.snowdrop.buildpack.Build called :: Buildpack :: %s",getBuildpackDir());
-        LOG.infof("## Layers dir: %s", this.LAYERS_DIR);
-        LOG.infof("## Platform dir: %s", this.PLATFORM_DIR);
-        LOG.infof("## dev.snowdrop.buildpack.Build plan: %s", this.BUILD_PLAN);
-        LOG.infof("## Working dir: %s", getWorkingDir());
+        LOG.info("## dev.snowdrop.buildpack.Build called :: Buildpack :: " + getBuildpackDir());
+        LOG.info("## Layers dir: " + this.LAYERS_DIR);
+        LOG.info("## Platform dir: " + this.PLATFORM_DIR);
+        LOG.info("## dev.snowdrop.buildpack.Build plan: " + this.BUILD_PLAN);
+        LOG.info("## Working dir: " + getWorkingDir());
 
         LOG.info("## Calling step to read the TOML plan");
         // TODO: Review spec as we dont consume the same object as what is produced by the detect
@@ -36,8 +36,8 @@ public class Build extends BuildPacks {
         // dev.snowdrop.buildpack.Build consumes a "Buildpack Plan" : https://github.com/buildpacks/spec/blob/main/buildpack.md#buildpack-plan-toml
         runtimeCmd("cat " + this.BUILD_PLAN);
         BuildPackPlan bpp = convertFileToPOJO(this.BUILD_PLAN,BuildPackPlan.class);
-        LOG.infof("## BuildPack Plan - Entry Name: %s", bpp.getEntries().get(0).getName());
-        LOG.infof("## BuildPack Plan - Entry Version: %s", bpp.getEntries().get(0).getMetadata().get("version"));
+        LOG.info("## BuildPack Plan - Entry Name: " + bpp.getEntries().get(0).getName());
+        LOG.info("## BuildPack Plan - Entry Version: " + bpp.getEntries().get(0).getMetadata().get("version"));
         LOG.info("## Reading TOML plan executed");
 
         // TODO : Implement the logic to perform a maven build

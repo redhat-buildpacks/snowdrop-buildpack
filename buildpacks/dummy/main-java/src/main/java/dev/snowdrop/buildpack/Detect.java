@@ -17,7 +17,7 @@ public class Detect extends BuildPacks {
     public Detect(String[] args) {
         super();
         if (args.length < 2) {
-            LOG.errorf("expected 2 arguments and received %d", args.length);
+            LOG.warning("expected 2 arguments and received " + args.length);
         }
         this.PLATFORM_DIR = args[0];
         this.BUILD_PLAN = args[1];
@@ -26,10 +26,10 @@ public class Detect extends BuildPacks {
     public int call() throws Exception {
         File pomFile = new File(getWorkingDir() + "/pom.xml");
 
-        LOG.infof("## dev.snowdrop.buildpack.Detect called :: Buildpack :: %s", getBuildpackDir());
-        LOG.infof("## Platform dir: %s", PLATFORM_DIR);
-        LOG.infof("## dev.snowdrop.buildpack.Build plan: %s", BUILD_PLAN);
-        LOG.infof("## Working Directory = %s", getWorkingDir());
+        LOG.info("## dev.snowdrop.buildpack.Detect called :: Buildpack :: "+ getBuildpackDir());
+        LOG.info("## Platform dir: " + PLATFORM_DIR);
+        LOG.info("## dev.snowdrop.buildpack.Build plan: " + BUILD_PLAN);
+        LOG.info("## Working Directory = " + getWorkingDir());
 
         LOG.info("## Check if pom.xml exists");
         if (pomFile.isFile()) {
