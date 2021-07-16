@@ -48,8 +48,8 @@ public class App implements QuarkusApplication {
             }
             return 0;
         } catch(Exception ex) {
-            LOG.error("## Error happened during the call to the Application ");
-            LOG.error(ex);
+            System.out.println("## Error happened during the call to the Application ");
+            System.out.println(ex);
             return 1;
         }
     }

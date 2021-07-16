@@ -1,4 +1,4 @@
-# Buildpacks to include within the Builder
+# Buildpacks to include within the Builder image
 [[buildpacks]]
 uri = "../../buildpacks/maven"
 

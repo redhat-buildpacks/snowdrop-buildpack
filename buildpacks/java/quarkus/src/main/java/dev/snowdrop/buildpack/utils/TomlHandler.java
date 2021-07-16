@@ -12,10 +12,15 @@ import java.nio.file.Paths;
 public class TomlHandler {
     static final org.jboss.logging.Logger LOG = Logger.getLogger(TomlHandler.class);
 
-    public static void writePOJOToFile(String filePath, Object obj) throws Exception {
-        TomlMapper mapper = new TomlMapper();
-        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        mapper.writeValue(new File(filePath),obj);
+    public static void writePOJOToFile(String filePath, Object obj) {
+        try {
+            TomlMapper mapper = new TomlMapper();
+            mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+            mapper.writeValue(new File(filePath), obj);
+        } catch (Exception ex) {
+            System.out.println("A TOML Parsing error occurred !!!");
+            System.out.println(ex);
+        }
     }
 
     public static String convertPOJOToString(Object obj) throws Exception {

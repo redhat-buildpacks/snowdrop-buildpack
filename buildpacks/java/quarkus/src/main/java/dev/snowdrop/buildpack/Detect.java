@@ -22,7 +22,7 @@ public class Detect extends BuildPacks {
         this.BUILD_PLAN = args[1];
     }
 
-    public int call() throws Exception {
+    public int call() {
         File pomFile = new File(getWorkingDir() + "/pom.xml");
 
         LOG.infof("## Detect called :: Buildpack :: %s", getBuildpackDir());
@@ -33,7 +33,7 @@ public class Detect extends BuildPacks {
         LOG.info("## Check if pom.xml exists");
         if (pomFile.isFile()) {
             LOG.info("pom.xml file is there ;-)");
-            writePOJOToFile(BUILD_PLAN,createBuildPlan());
+            writePOJOToFile(this.BUILD_PLAN,createBuildPlan());
             runtimeCmd("cat " + this.BUILD_PLAN);
             return 0;
         } else {
