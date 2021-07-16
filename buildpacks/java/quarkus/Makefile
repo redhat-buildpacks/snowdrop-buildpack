@@ -1,4 +1,5 @@
-SHELL          := /bin/bash
+SHELL             := /bin/bash
+TARGET_BUILDPACK  := ../../dummy
 
 all: test native move-runner symlink
 
@@ -23,9 +24,9 @@ native:
 
 move-runner:
 	echo "Move the file created under bin/ folder"
-	mv ./target/main-runner ../../dummy/bin/main
+	mv ./target/main-runner $(TARGET_BUILDPACK)/bin/main
 
 symlink:
 	echo "Create the symbolic links for detect and build"
-	ln -fs main ../../dummy/bin/build
-	ln -fs main ../../dummy/bin/detect
+	ln -fs main $(TARGET_BUILDPACK)/bin/build
+	ln -fs main $(TARGET_BUILDPACK)/bin/detect

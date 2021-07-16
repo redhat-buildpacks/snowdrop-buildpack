@@ -22,6 +22,7 @@ public class App implements QuarkusApplication {
 
     @Override
     public int run(String... args) throws Exception {
+        LOG.info("## App called ...");
         String BP_CMD = System.getenv("BP_CMD");
         if (BP_CMD == null) {
             BP_CMD = "ps -eo command | grep '/bin/*'";
@@ -41,7 +42,9 @@ public class App implements QuarkusApplication {
                 LOG.info("## Command called is /bin/build");
                 Build b = new Build(args);
                 return b.call();
-            case "": new Exception("## Unsupported command called !");
+            case "":
+                LOG.error("## Unsupported command called !");
+                return 1;
         }
 
         return 0;
