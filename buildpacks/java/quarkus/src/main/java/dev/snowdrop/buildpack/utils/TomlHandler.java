@@ -21,7 +21,7 @@ public class TomlHandler {
             "provides = [{name = 'maven'}]";
             //TomlMapper mapper = new TomlMapper();
             //mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-            printMessage("TOML mapper created using Build plan : " + (BuildPlan)obj);
+            printMessage("TOML mapper created using Build plan object");
             printMessage("Path : " + filePath);
             File f = new File(filePath);
             FileWriter fw = new FileWriter(f.getAbsoluteFile());
