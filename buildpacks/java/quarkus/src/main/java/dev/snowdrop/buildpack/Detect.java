@@ -40,6 +40,7 @@ public class Detect extends BuildPacks {
             printMessage("Creating the Build plan as TOML and writing it");
             try {
                 writePOJOToFile(this.BUILD_PLAN,createBuildPlan());
+                runtimeCmd("cat " + this.BUILD_PLAN);
                 return 0;
             } catch(Exception ex) {
                 throw new Exception("Error occurred during the step to write the Build plan TOML as file");
@@ -55,11 +56,11 @@ public class Detect extends BuildPacks {
         buildPlanBuilder
                 .withPath(this.BUILD_PLAN)
                 .addNewRequire()
-                .withName("maven")
-                .addToMetadata("version", "3.6.4")
+                    .withName("maven")
+                    .addToMetadata("version", "3.6.4")
                 .endRequire()
                 .addNewProvide()
-                .withName("maven")
+                    .withName("maven")
                 .endProvide();
         printMessage("Build plan created");
         return buildPlanBuilder.build();
