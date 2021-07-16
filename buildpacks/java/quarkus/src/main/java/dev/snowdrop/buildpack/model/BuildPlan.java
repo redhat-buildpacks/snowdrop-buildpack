@@ -8,10 +8,10 @@ import io.sundr.builder.annotations.Buildable;
 import java.util.List;
 
 @RegisterForReflection(classNames = {
-        "dev.snowdrop.buildpack.dev.snowdrop.buildpack.model.BuildPlan",
-        "dev.snowdrop.buildpack.dev.snowdrop.buildpack.model.BuildPlanProvide",
-        "dev.snowdrop.buildpack.dev.snowdrop.buildpack.model.BuildPlanRequire",
-        "dev.snowdrop.buildpack.dev.snowdrop.buildpack.model.EditableBuildPlan"}
+        "dev.snowdrop.buildpack.model.BuildPlan",
+        "dev.snowdrop.buildpack.model.BuildPlanProvide",
+        "dev.snowdrop.buildpack.model.BuildPlanRequire",
+        "dev.snowdrop.buildpack.model.EditableBuildPlan"}
 )
 @JsonIgnoreProperties
 @Buildable
