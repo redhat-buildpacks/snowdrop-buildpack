@@ -39,7 +39,7 @@ public class Detect extends BuildPacks {
             printMessage("pom.xml file is there ;-)");
             printMessage("Creating the Build plan as TOML and writing it");
             try {
-                //writePOJOToFile(this.BUILD_PLAN,createBuildPlan());
+                writePOJOToFile(this.BUILD_PLAN,createBuildPlan());
                 return 0;
             } catch(Exception ex) {
                 throw new Exception("Error occurred during the step to write the Build plan TOML as file");

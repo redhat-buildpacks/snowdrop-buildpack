@@ -13,12 +13,16 @@ import static dev.snowdrop.buildpack.utils.Logging.printMessage;
 
 public class TomlHandler {
 
-    public static void writePOJOToFile(String filePath, Object obj) throws Exception{
+    public static void writePOJOToFile(String filePath, Object obj) throws Exception {
+        try {
             TomlMapper mapper = new TomlMapper();
             mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-            printMessage("TOML mapper created using Build plan : " + (BuildPlan)obj);
+            printMessage("TOML mapper created using Build plan : " + (BuildPlan) obj);
             printMessage("Path : " + filePath);
             mapper.writeValue(new File(filePath), obj);
+        } catch(Exception ex) {
+            throw new Exception("Parsing of the POJO to TOML file failed !!");
+        }
     }
 
     public static String convertPOJOToString(Object obj) throws Exception {
