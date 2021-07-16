@@ -3,6 +3,7 @@ package dev.snowdrop.buildpack;
 import dev.snowdrop.buildpack.model.BuildPackPlan;
 import dev.snowdrop.buildpack.model.BuildPlan;
 
+import static dev.snowdrop.buildpack.utils.Logging.printMessage;
 import static dev.snowdrop.buildpack.utils.ProcessHandler.runtimeCmd;
 import static dev.snowdrop.buildpack.utils.TomlHandler.convertFileToPOJO;
 
@@ -17,7 +18,7 @@ public class Build extends BuildPacks {
     public Build(String[] args) {
         super();
         if (args.length < 3) {
-            LOG.errorf("expected 3 arguments and received %d", args.length);
+            printMessage("expected 3 arguments and received " + args.length);
         }
         this.LAYERS_DIR = args[0];
         this.PLATFORM_DIR = args[1];
@@ -25,28 +26,28 @@ public class Build extends BuildPacks {
     }
 
     public int call() throws Exception {
-        LOG.infof("## Build called :: Buildpack :: %s",getBuildpackDir());
-        LOG.infof("## Layers dir: %s", this.LAYERS_DIR);
-        LOG.infof("## Platform dir: %s", this.PLATFORM_DIR);
-        LOG.infof("## Build plan: %s", this.BUILD_PLAN);
-        LOG.infof("## Working dir: %s", getWorkingDir());
+        printMessage("Build called :: Buildpack :: " + getBuildpackDir());
+        printMessage("Layers dir: " + this.LAYERS_DIR);
+        printMessage("Platform dir: " + this.PLATFORM_DIR);
+        printMessage("Build plan: " + this.BUILD_PLAN);
+        printMessage("Working dir: " + getWorkingDir());
 
-        LOG.info("## Calling step to read the TOML plan");
+        printMessage("Calling step to read the TOML plan");
         // TODO: Review spec as we dont consume the same object as what is produced by the detect
         // Detect produces a "Build pan" : https://github.com/buildpacks/spec/blob/main/buildpack.md#build-plan-toml
         // Build consumes a "Buildpack Plan" : https://github.com/buildpacks/spec/blob/main/buildpack.md#buildpack-plan-toml
         runtimeCmd("cat " + this.BUILD_PLAN);
         BuildPackPlan bpp = convertFileToPOJO(this.BUILD_PLAN,BuildPackPlan.class);
-        LOG.infof("## BuildPack Plan - Entry Name: %s", bpp.getEntries().get(0).getName());
-        LOG.infof("## BuildPack Plan - Entry Version: %s", bpp.getEntries().get(0).getMetadata().get("version"));
-        LOG.info("## Reading TOML plan executed");
+        printMessage("BuildPack Plan - Entry Name: " +  bpp.getEntries().get(0).getName());
+        printMessage("BuildPack Plan - Entry Version: " + bpp.getEntries().get(0).getMetadata().get("version"));
+        printMessage("Reading TOML plan executed");
 
         // TODO : Implement the logic to perform a maven build
         /**
-        LOG.infof("## Execute bash cmd: %s", cmd);
+        printMessage("Execute bash cmd: %s", cmd);
         runtimeCmd("whoami; id; cat /etc/passwd");
         runtimeCmd("microdnf install -y perlx");
-        LOG.info("## Command bash executed");
+         printMessage("Command bash executed");
         **/
         return 0;
     }

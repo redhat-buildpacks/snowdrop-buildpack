@@ -3,17 +3,16 @@ package dev.snowdrop.buildpack;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
-import org.jboss.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 
+import static dev.snowdrop.buildpack.utils.Logging.printMessage;
 import static dev.snowdrop.buildpack.utils.ProcessHandler.commandProcessed;
 import static java.lang.String.join;
 
 @ApplicationScoped
 @QuarkusMain
 public class App implements QuarkusApplication {
-    static final Logger LOG = Logger.getLogger(App.class);
 
     public static void main(String[] argv) {
         Quarkus.run(App.class, argv);
@@ -21,36 +20,40 @@ public class App implements QuarkusApplication {
 
     @Override
     public int run(String... args) {
+        // CODE is defined to 1 which mean an error occurred or detection failed
+        // If the POM file is detected, then e will return 0
+        int CODE = 1;
         try {
-            LOG.info("## App called ...");
+            printMessage("App called ...");
             String BP_CMD = System.getenv("BP_CMD");
             if (BP_CMD == null) {
                 BP_CMD = "ps -eo command | grep '/bin/*'";
             }
-            LOG.info("BP_CMD :" + BP_CMD);
-            LOG.infof("## Arguments passed: %s",join(" ", args));
-            LOG.info("## Env Var ...");
+            printMessage("BP_CMD env var: " + BP_CMD);
+            printMessage("Arguments passed: " + join(" ", args));
+            printMessage("Env Var ...");
             //printAllEnv();
 
-            LOG.info("## Check the name of the program called by the lifecycle creator");
+            printMessage("Check the name of the program called by the lifecycle creator");
             switch (commandProcessed(BP_CMD)) {
                 case "detect":
-                    LOG.info("## Command called is /bin/detect");
+                    printMessage("Command called is /bin/detect");
                     Detect d = new Detect(args);
-                    return d.call();
+                    CODE = d.call();
+                    break;
                 case "build":
-                    LOG.info("## Command called is /bin/build");
+                    printMessage("Command called is /bin/build");
                     Build b = new Build(args);
-                    return b.call();
+                    CODE = b.call();
+                    break;
                 case "":
-                    LOG.error("## Unsupported command called !");
-                    return 1;
+                    throw new Exception("Unsupported command called !");
             }
-            return 0;
+            return CODE;
         } catch(Exception ex) {
-            System.out.println("## Error happened during the call to the Application ");
-            System.out.println(ex);
-            return 1;
+            printMessage("Error happened during the application's call");
+            ex.printStackTrace(System.out);
+            return CODE;
         }
     }
 }

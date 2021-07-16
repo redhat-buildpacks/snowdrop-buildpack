@@ -1,14 +1,12 @@
 package dev.snowdrop.buildpack.utils;
 
-import org.jboss.logging.Logger;
-
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class ProcessHandler {
-    static final org.jboss.logging.Logger LOG = Logger.getLogger(ProcessHandler.class);
+import static dev.snowdrop.buildpack.utils.Logging.printMessage;
 
+public class ProcessHandler {
     public static void runtimeCmd(String cmd) {
         Process p = null;
         try {
@@ -16,22 +14,22 @@ public class ProcessHandler {
 
             // Log stdout
             Scanner s = new Scanner(p.getInputStream());
-            LOG.infof("Stdout of the command executed: %s", cmd);
+            printMessage("Stdout of the command executed: " + cmd);
             while (s.hasNext()) {
-                LOG.info(s.nextLine());
+                printMessage(s.nextLine());
             }
 
             // TODO: Review the code to LOG if only stderr is not empty
             // Log stderr
             s = new Scanner(p.getErrorStream());
-            LOG.infof("Stderr of the command executed: %s", cmd);
+            printMessage("Stderr of the command executed: " + cmd);
             while (s.hasNext()) {
-                LOG.info(s.nextLine());
+                printMessage(s.nextLine());
             }
 
             // Exit code
             int exitVal = p.waitFor();
-            LOG.info("Exited with error code " + exitVal);
+            printMessage("Exited with error code " + exitVal);
         } catch (Exception e) {
             e.printStackTrace();
         }

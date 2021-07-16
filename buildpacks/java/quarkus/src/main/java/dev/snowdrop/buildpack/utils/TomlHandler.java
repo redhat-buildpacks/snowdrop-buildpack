@@ -2,25 +2,23 @@ package dev.snowdrop.buildpack.utils;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
-import org.jboss.logging.Logger;
+import dev.snowdrop.buildpack.model.BuildPlan;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class TomlHandler {
-    static final org.jboss.logging.Logger LOG = Logger.getLogger(TomlHandler.class);
+import static dev.snowdrop.buildpack.utils.Logging.printMessage;
 
-    public static void writePOJOToFile(String filePath, Object obj) {
-        try {
+public class TomlHandler {
+
+    public static void writePOJOToFile(String filePath, Object obj) throws Exception{
             TomlMapper mapper = new TomlMapper();
             mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+            printMessage("TOML mapper created using Build plan : " + (BuildPlan)obj);
+            printMessage("Path : " + filePath);
             mapper.writeValue(new File(filePath), obj);
-        } catch (Exception ex) {
-            System.out.println("A TOML Parsing error occurred !!!");
-            System.out.println(ex);
-        }
     }
 
     public static String convertPOJOToString(Object obj) throws Exception {
@@ -43,12 +41,11 @@ public class TomlHandler {
         try {
             // read all bytes
             byte[] bytes = Files.readAllBytes(Paths.get(path));
-            LOG.info("File size: " + bytes.length);
+            printMessage("File size: " + bytes.length);
             // convert bytes to string
             String content = new String(bytes);
             // print contents
-            LOG.info(content);
-
+            printMessage(content);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
