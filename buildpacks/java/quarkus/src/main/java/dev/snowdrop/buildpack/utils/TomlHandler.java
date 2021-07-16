@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
 import dev.snowdrop.buildpack.model.BuildPlan;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,11 +17,18 @@ public class TomlHandler {
 
     public static void writePOJOToFile(String filePath, Object obj) throws Exception {
         try {
-            TomlMapper mapper = new TomlMapper();
-            mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-            printMessage("TOML mapper created using Build plan : " + (BuildPlan) obj);
+            String content = "requires = [{name = 'maven', metadata = {version = '3.6.4'}}]\n" +
+            "provides = [{name = 'maven'}]";
+            //TomlMapper mapper = new TomlMapper();
+            //mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+            printMessage("TOML mapper created using Build plan : " + (BuildPlan)obj);
             printMessage("Path : " + filePath);
-            mapper.writeValue(new File(filePath), obj);
+            File f = new File(filePath);
+            FileWriter fw = new FileWriter(f.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(content);
+            bw.close();
+            // mapper.writeValue(new File(filePath), obj);
         } catch(Exception ex) {
             throw new Exception("Parsing of the POJO to TOML file failed !!");
         }
