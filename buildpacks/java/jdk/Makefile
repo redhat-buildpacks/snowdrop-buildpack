@@ -1,12 +1,13 @@
-SHELL         := /bin/bash
-CURRENT_DIR   := $(shell pwd)
-MAVEN_PROJECT := main-java
-VERSION       := 1.0.0-SNAPSHOT
-TARGET_JAR    := $(MAVEN_PROJECT)-$(VERSION)-jar-with-dependencies.jar
-APP_NAME      := main
-CLASS_NAME    := dev.snowdrop.buildpack.App
+SHELL             := /bin/bash
+CURRENT_DIR       := $(shell pwd)
+MAVEN_PROJECT     := jdk
+VERSION           := 1.0.0-SNAPSHOT
+TARGET_JAR        := $(MAVEN_PROJECT)-$(VERSION)-jar-with-dependencies.jar
+APP_NAME          := main
+CLASS_NAME        := dev.snowdrop.buildpack.App
+TARGET_BUILDPACK  := ../../dummy
 
-all: compile native-build package-app
+all: compile native-build move-main symlink
 
 compile:
 	mvn clean package
@@ -22,7 +23,16 @@ native-build:
 	-H:Class=$(CLASS_NAME) \
 	-H:+ReportUnsupportedElementsAtRuntime
 
-package-app:
+move-main:
+	echo "Move the file created under bin/ folder"
+	mv ./main $(TARGET_BUILDPACK)/bin/main
+
+symlink:
+	echo "Create the symbolic links for detect and build"
+	ln -fs main $(TARGET_BUILDPACK)/bin/build
+	ln -fs main $(TARGET_BUILDPACK)/bin/detect
+
+containerize-app:
 	docker build -t snowdrop/native-app . -f native.Dockerfile
 
 launch:

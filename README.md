@@ -129,12 +129,12 @@ mvn clean package -Pnative \
 ```
 - Rename it and move it under the `bin` folder
 ```bash
-mv ./target/main-runner ../dummy/bin/main
+mv ./target/main-runner ../../dummy/bin/main
 ```  
 - Create the symbolic links pointing to the main application
 ```bash
-ln -fs main ../dummy/bin/detect 
-ln -fs main ../dummy/bin/build 
+ln -fs main ../../dummy/bin/detect 
+ln -fs main ../../dummy/bin/build 
 ```
 **IMPORTANT**: All these instructions can be executed using the `Makefile` and command `make all`
 
@@ -142,7 +142,7 @@ ln -fs main ../dummy/bin/build
 ```bash
 pack builder create redhat/buildpacks-builder-maven-jvm:latest --config ./builders/maven-jvm/builder.toml
 ```
-- dev.snowdrop.buildpack.Build now a Spring Boot's application packaged within this project using the builder image and the buildpacks `dummy`
+- Build now a Spring Boot's application packaged within this project using the builder image and the buildpacks `dummy`
 ```bash
 pack build java-dummy-app --builder redhat/buildpacks-builder-maven-jvm:latest -p ./apps/snowdrop-sample-app -v -b dev.snowdrop.buildpacks.dummy
 ```

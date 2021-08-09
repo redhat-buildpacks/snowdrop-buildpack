@@ -1,25 +1,30 @@
-## Howto - native executable
+## How to create a native executable
 
-- dev.snowdrop.buildpack.Build first the docker image containing the `native-image` tool and a `/project` volume
+TODO: To be reviewed and document how to use instead the Makefile 
+
+- Build first the docker image containing:
+  - graalvm-ce:21.1.0,
+  - the `native-image` gu tool 
+  - a `/project` volume
 
 ```bash
 docker build -t snowdrop/native-image .
 ```
 
-- Compile the project `mvn clean package`
+- Next, compile the java project `mvn clean package`
 - Create the `native` executable application
 ```bash
 docker run --rm -it \
-  -v /Users/cmoullia/code/snowdrop/buildpacks-projects/buildpacks/tmp/graalvm/:/project \
-  snowdrop/native-image \
-  --no-fallback \
-   --static \
-  -cp ./target/hello-world-1.0-SNAPSHOT-jar-with-dependencies.jar \
-  -H:Name=helloworld \
-  -H:Class=HelloWorld \
-  -H:+ReportUnsupportedElementsAtRuntime
+        -v /Users/cmoullia/code/snowdrop/buildpacks-projects/buildpacks/buildpacks/java/jdk:/project \
+        snowdrop/native-image \
+        --no-fallback \
+        --static \
+        -cp ./target/main-java-1.0.0-SNAPSHOT-jar-with-dependencies.jar \
+        -H:Name=main \
+        -H:Class=dev.snowdrop.buildpack.App \
+        -H:+ReportUnsupportedElementsAtRuntime
 ```
-- Create an image packaging it using `scratch` OS
+- Create an image packaging the native executable using the `alpine` OS
 ```bash
 docker build -t snowdrop/native-app . -f native.Dockerfile
 ```
