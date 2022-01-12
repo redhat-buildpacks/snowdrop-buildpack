@@ -72,11 +72,11 @@ BUILD_IMAGE=${REPO_PREFIX}-build:${TAG}
 #   docker build -t "${BASE_IMAGE}" "${IMAGE_DIR}/base"
 # fi
 
-BASE_IMAGE=registry.access.redhat.com/ubi8/openjdk-11
+BASE_IMAGE=registry.access.redhat.com/ubi8/openjdk-17
 echo "BUILDING ${BUILD_IMAGE}  using as BASE IMAGE: ${BASE_IMAGE} ..."
 docker build --build-arg "base_image=${BASE_IMAGE}" --build-arg "stack_id=${STACK_ID}" -t "${BUILD_IMAGE}"  "${IMAGE_DIR}/build"
 
-BASE_IMAGE=registry.access.redhat.com/ubi8/openjdk-11-runtime
+BASE_IMAGE=registry.access.redhat.com/ubi8/openjdk-17-runtime
 echo "BUILDING ${RUN_IMAGE} using as BASE IMAGE: ${BASE_IMAGE} ..."
 docker build --build-arg "base_image=${BASE_IMAGE}" --build-arg "stack_id=${STACK_ID}" -t "${RUN_IMAGE}" "${IMAGE_DIR}/run"
 

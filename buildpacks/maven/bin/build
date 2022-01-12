@@ -28,7 +28,7 @@ mkdir -p $HOME/.m2
 ln -s $LAYERS_DIR/m2repo $HOME/.m2/repository
 echo -e 'cache = true' > $LAYERS_DIR/m2repo.toml
 
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 
 # Is there still a maven app to build? (other buildpacks could have removed pom.xml)
 if [[ -f pom.xml ]]; then
@@ -81,10 +81,10 @@ if [[ -f pom.xml ]]; then
 
         find $APP_DIR -mindepth 1 -delete       
 
-        # Command to be used with ubi8-openjdk11
+        # Command to be used with ubi8-openjdk17
         # runCommand="/opt/jboss/container/java/run/run-java.sh"
 
-        # Command to be used with ubi8-openjdk11-runtime
+        # Command to be used with ubi8-openjdk17-runtime
         runCommand="java -jar $LAYERS_DIR/2-app/$targetJar"
     fi
 
