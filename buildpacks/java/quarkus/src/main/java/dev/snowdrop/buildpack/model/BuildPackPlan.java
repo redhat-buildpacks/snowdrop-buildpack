@@ -1,6 +1,5 @@
 package dev.snowdrop.buildpack.model;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import io.sundr.builder.annotations.Buildable;
 

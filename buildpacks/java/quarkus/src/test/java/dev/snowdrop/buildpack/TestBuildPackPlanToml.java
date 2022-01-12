@@ -2,8 +2,6 @@ package dev.snowdrop.buildpack;
 
 import dev.snowdrop.buildpack.model.BuildPackPlan;
 import dev.snowdrop.buildpack.model.BuildPackPlanBuilder;
-import dev.snowdrop.buildpack.model.BuildPlan;
-import dev.snowdrop.buildpack.model.BuildPlanBuilder;
 import org.junit.jupiter.api.Test;
 
 import static dev.snowdrop.buildpack.utils.TomlHandler.convertPOJOToString;

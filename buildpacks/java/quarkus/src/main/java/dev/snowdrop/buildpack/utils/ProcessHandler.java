@@ -13,18 +13,20 @@ public class ProcessHandler {
             p = Runtime.getRuntime().exec(new String[]{"bash", "-c", cmd});
 
             // Log stdout
-            Scanner s = new Scanner(p.getInputStream());
-            printMessage("Stdout of the command executed: " + cmd);
-            while (s.hasNext()) {
-                printMessage(s.nextLine());
+            try (Scanner s = new Scanner(p.getInputStream())) {
+                printMessage("Stdout of the command executed: " + cmd);
+                while (s.hasNext()) {
+                    printMessage(s.nextLine());
+                }
             }
 
             // TODO: Review the code to LOG if only stderr is not empty
             // Log stderr
-            s = new Scanner(p.getErrorStream());
-            printMessage("Stderr of the command executed: " + cmd);
-            while (s.hasNext()) {
-                printMessage(s.nextLine());
+            try (Scanner s = new Scanner(p.getErrorStream())) {
+                printMessage("Stderr of the command executed: " + cmd);
+                while (s.hasNext()) {
+                    printMessage(s.nextLine());
+                }
             }
 
             // Exit code

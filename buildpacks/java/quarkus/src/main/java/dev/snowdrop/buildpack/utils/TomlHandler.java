@@ -2,7 +2,6 @@ package dev.snowdrop.buildpack.utils;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
-import dev.snowdrop.buildpack.model.BuildPlan;
 
 import java.io.BufferedWriter;
 import java.io.File;
