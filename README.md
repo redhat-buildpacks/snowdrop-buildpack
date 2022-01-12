@@ -123,12 +123,14 @@ public class dev.snowdrop.buildpack.App implements QuarkusApplication {
 cd buildpacks/java/quarkus
 mvn clean package -Pnative \
     -Dquarkus.native.container-build=true \
+    -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-native-image:21.3-java17 \
     -Dquarkus.banner.enabled=false \
     -Dquarkus.package.output-name=main \
-    -f main/pom.xml
+    -f pom.xml
 ```
 - Rename it and move it under the `bin` folder
 ```bash
+mkdir -p ../../dummy/bin
 mv ./target/main-runner ../../dummy/bin/main
 ```  
 - Create the symbolic links pointing to the main application
