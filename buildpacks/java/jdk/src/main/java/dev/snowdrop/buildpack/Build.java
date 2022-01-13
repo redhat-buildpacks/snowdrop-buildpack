@@ -36,8 +36,8 @@ public class Build extends BuildPacks {
         // dev.snowdrop.buildpack.Build consumes a "Buildpack Plan" : https://github.com/buildpacks/spec/blob/main/buildpack.md#buildpack-plan-toml
         runtimeCmd("cat " + this.BUILD_PLAN);
         BuildPackPlan bpp = convertFileToPOJO(this.BUILD_PLAN,BuildPackPlan.class);
-        LOG.info("## BuildPack Plan - Entry Name: " + bpp.getEntries().get(0).getName());
-        LOG.info("## BuildPack Plan - Entry Version: " + bpp.getEntries().get(0).getMetadata().get("version"));
+        LOG.info("## BuildPack Plan - Entry Name: " + bpp.entries().get(0).name());
+        LOG.info("## BuildPack Plan - Entry Version: " + bpp.entries().get(0).metadata().get("version"));
         LOG.info("## Reading TOML plan executed");
 
         // TODO : Implement the logic to perform a maven build

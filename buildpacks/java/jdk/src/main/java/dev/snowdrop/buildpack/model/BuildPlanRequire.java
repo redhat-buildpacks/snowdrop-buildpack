@@ -7,23 +7,4 @@ import java.util.Map;
 
 @Buildable
 @JsonPropertyOrder({ "name", "metadata" })
-public class BuildPlanRequire {
-    private String name;
-    private Map<String, Object> metadata;
-
-    public BuildPlanRequire() {}
-
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Map<String, Object> getMetadata() {
-        return metadata;
-    }
-    public void setMetadata(Map<String, Object> metadata) {
-        this.metadata = metadata;
-    }
-}
+public record BuildPlanRequire(String name, Map<String, Object> metadata) {}

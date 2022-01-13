@@ -1,7 +1,6 @@
 package dev.snowdrop.buildpack;
 
 import dev.snowdrop.buildpack.model.BuildPackPlan;
-import dev.snowdrop.buildpack.model.BuildPlan;
 
 import static dev.snowdrop.buildpack.utils.Logging.printMessage;
 import static dev.snowdrop.buildpack.utils.ProcessHandler.runtimeCmd;
