@@ -33,3 +33,5 @@ tmp/
 /buildpacks/dummy/main-java/detect
 /buildpacks/dummy/main-java/main
 /buildpacks/dummy/main-java/main.build_artifacts.txt
+/buildpacks/java/jdk/main
+/buildpacks/java/jdk/main.build_artifacts.txt
